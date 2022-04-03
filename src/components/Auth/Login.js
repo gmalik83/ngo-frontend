@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Footer from '../Footer';
 
-const Login = (props) => {
+const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   let history = useNavigate();
 
@@ -23,7 +23,7 @@ const Login = (props) => {
     console.log(json);
     if (json.success) {
       // Save Auth Token and Redirect
-      localStorage.setItem('token', json.authtoken);
+      localStorage.setItem('tokenn', json.authtoken);
     } else {
       alert('Invalid credentials');
     }
