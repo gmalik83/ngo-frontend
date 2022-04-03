@@ -11,22 +11,22 @@ const Footer = () => {
 
         <div>
           <Link to="/" className="me-4 text-reset">
-            <i className="fab fa-facebook-f"></i>
+            <i className="fa fa-facebook-f"></i>
           </Link>
           <Link to="/" className="me-4 text-reset">
-            <i className="fab fa-twitter"></i>
+            <i className="fa fa-twitter"></i>
           </Link>
           <Link to="/" className="me-4 text-reset">
-            <i className="fab fa-google"></i>
+            <i className="fa fa-google"></i>
           </Link>
           <Link to="/" className="me-4 text-reset">
-            <i className="fab fa-instagram"></i>
+            <i className="fa fa-instagram"></i>
           </Link>
           <Link to="/" className="me-4 text-reset">
-            <i className="fab fa-linkedin"></i>
+            <i className="fa fa-linkedin"></i>
           </Link>
           <Link to="/" className="me-4 text-reset">
-            <i className="fab fa-github"></i>
+            <i className="fa fa-github"></i>
           </Link>
         </div>
       </section>
@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="row mt-3">
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
-                <i className="fas fa-gem me-3"></i>North Legion
+                <i className="fa-solid fa-gem"></i>North Legion
               </h6>
             </div>
 
@@ -91,18 +91,18 @@ const Footer = () => {
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Contact US</h6>
               <p>
-                <i className="fas fa-home me-3"></i> NIT Kurukshetra , Haryana ,
+                <i className="fa fa-home me-3"></i> NIT Kurukshetra , Haryana ,
                 India 136119
               </p>
               <p>
-                <i className="fas fa-envelope me-3"></i>
+                <i className="fa fa-envelope me-3"></i>
                 info@northlegion.com
               </p>
               <p>
-                <i className="fas fa-phone me-3"></i> 01744 233 229
+                <i className="fa fa-phone me-3"></i> 01744 233 229
               </p>
               <p>
-                <i className="fas fa-print me-3"></i> 01744 233 229
+                <i className="fa fa-print me-3"></i> 01744 233 229
               </p>
             </div>
           </div>
