@@ -107,6 +107,9 @@ export const Contact = () => {
               onChange={onChange}
             />
           </div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
         </form>
       </div>
     </div>
