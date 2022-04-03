@@ -9,6 +9,7 @@ import { About } from './components/About';
 import { Contact } from './components/Contact';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import Footer from './components/Footer';
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -25,6 +26,7 @@ function App() {
           <Route path="/signin" exact element={<Login />} />
           <Route path="/register" exact element={<Register />} />
         </Routes>
+        <Footer />
       </Router>
     </>
   );
