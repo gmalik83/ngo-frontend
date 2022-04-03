@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from './Footer';
 import Values from './Values';
 
 export const About = () => {

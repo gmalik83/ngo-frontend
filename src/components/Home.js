@@ -1,7 +1,6 @@
 import React from 'react';
 import Articles from './Articles';
 import Slider from './Slider';
-import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import Values from './Values';
 import Service1 from './images/image1.jpg';

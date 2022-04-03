@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../Footer';
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
