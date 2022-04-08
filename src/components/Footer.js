@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="row mt-3">
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
-                <i className="fa-solid fa-gem"></i>North Legion
+                <i className="fa-solid fa-gem"></i>Shiksha
               </h6>
             </div>
 
@@ -96,7 +96,7 @@ const Footer = () => {
               </p>
               <p>
                 <i className="fa fa-envelope me-3"></i>
-                info@northlegion.com
+                info@shiksha.com
               </p>
               <p>
                 <i className="fa fa-phone me-3"></i> 01744 233 229
@@ -112,7 +112,7 @@ const Footer = () => {
       <div className="text-center p-4 own-class">
         © 2022 Copyright:
         <Link className="text-reset fw-bold" to="/">
-          NorthLegion.org
+          shiksha.org
         </Link>
       </div>
     </footer>

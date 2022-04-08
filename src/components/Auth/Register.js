@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -14,7 +15,7 @@ const Register = () => {
     mobile: '',
   });
 
-  const history = useNavigate();
+  let navigate = useNavigate();
 
   const initialStateRender = useRef(true);
   const initialCityRender = useRef(true);
@@ -25,7 +26,10 @@ const Register = () => {
   const [statName, setstatName] = useState('');
   const [city, setCity] = useState([]);
   const [cityName, setCityName] = useState('');
+  const [successful, setSuccessful] = useState(false);
+  const [message, setMessage] = useState('');
 
+  // Get Token For Country State City API
   const getToken = async () => {
     const token = await fetch(
       'https://www.universal-tutorial.com/api/getaccesstoken',
@@ -44,7 +48,7 @@ const Register = () => {
     return finalToken;
   };
 
-  // For Country List in Select Country Option
+  // For Country List in Select Country Option : Render automatically
 
   useEffect(() => {
     const getCountry = async () => {
@@ -135,39 +139,65 @@ const Register = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log(credentials);
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/api/auth/register ', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
+    setMessage('');
+    setSuccessful(false);
+
+    AuthService.register(
+      credentials.name,
+      credentials.email,
+      credentials.password,
+      credentials.country,
+      credentials.state,
+      credentials.city,
+      credentials.address,
+      credentials.pincode,
+      credentials.mobile
+    ).then(
+      (response) => {
+        navigate('/profile');
+        window.location.reload();
+        setMessage(response.data.message);
+        setSuccessful(true);
       },
-      body: JSON.stringify({
-        name: credentials.name,
-        email: credentials.email,
-        password: credentials.password,
-        country: credentials.country,
-        state: credentials.state,
-        city: credentials.city,
-        address: credentials.address,
-        pincode: credentials.pincode,
-        mobile: credentials.mobile,
-      }),
-    });
-    const json = await response.json();
-    console.log(json);
-    if (json.success) {
-      // Save Auth Token and Redirect
-      localStorage.setItem('tokenn', json.authtoken);
-      history.push('/');
-    } else {
-      alert('Invalid Credentials');
-    }
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+      }
+    );
+    // const response = await fetch('http://localhost:5000/api/auth/register ', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     name: credentials.name,
+    //     email: credentials.email,
+    //     password: credentials.password,
+    //     country: credentials.country,
+    //     state: credentials.state,
+    //     city: credentials.city,
+    //     address: credentials.address,
+    //     pincode: credentials.pincode,
+    //     mobile: credentials.mobile,
+    //   }),
+    // });
+    // const json = await response.json();
+    // console.log(json);
+    // if (json.success) {
+    //   // Save Auth Token and Redirect
+    //   localStorage.setItem('tokenn', json.authtoken);
+    //   history.push('/');
+    // } else {
+    //   alert('Invalid Credentials');
+    // }
   };
 
   return (
@@ -175,128 +205,144 @@ const Register = () => {
       <div className="container mb-3">
         <h3 className="mt-3">Please Enter Your Details Here:</h3>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="Name">Name:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={credentials.name}
-              onChange={onChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="Email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={credentials.email}
-              onChange={onChange}
-              className="form-control"
-            />
-          </div>
-          <label htmlFor="Password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={credentials.password}
-            onChange={onChange}
-            className="form-control"
-          />
-          <label htmlFor="Country">Country:</label>
-          <select
-            className="form-select"
-            name="country"
-            value={credentials.country}
-            onChange={(e) => handleCountry(e)}
-          >
-            <option value="">Select Country</option>
-            {country.map((getCon, index) => (
-              <option key={index} value={getCon.country_name}>
-                {getCon.country_name}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="State">State:</label>
-          <select
-            className="form-select"
-            name="state"
-            value={credentials.state}
-            onChange={(e) => handleState(e)}
-          >
-            <option value="">Select State</option>
-            {stat.map((val, index) => (
-              <option key={index} value={val.state_name}>
-                {val.state_name}
-              </option>
-            ))}
-          </select>
-          <div className="mb-3">
-            <label htmlFor="City">City:</label>
-            <select
-              className="form-select "
-              name="city"
-              value={credentials.city}
-              onChange={(e) => handleCity(e)}
-            >
-              <option value="">Select City</option>
-              {city.map((val, index) => (
-                <option key={index} val={val.city_name}>
-                  {val.city_name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mb-3 mt-3">
-            <label htmlFor="Address" className="form-label">
-              Address:
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              name="address"
-              value={credentials.address}
-              onChange={onChange}
-              aria-describedby="addressHelp"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="Pincode" className="form-label">
-              Pincode
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="pincode"
-              name="pincode"
-              value={credentials.pincode}
-              onChange={onChange}
-              aria-describedby="pincodeHelp"
-            />
-          </div>
+          {!successful && (
+            <>
+              <div className="form-group">
+                <label htmlFor="Name">Name:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  value={credentials.name}
+                  onChange={onChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="Email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={credentials.email}
+                  onChange={onChange}
+                  className="form-control"
+                />
+              </div>
+              <label htmlFor="Password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={credentials.password}
+                onChange={onChange}
+                className="form-control"
+              />
+              <label htmlFor="Country">Country:</label>
+              <select
+                className="form-select"
+                name="country"
+                value={credentials.country}
+                onChange={(e) => handleCountry(e)}
+              >
+                <option value="">Select Country</option>
+                {country.map((getCon, index) => (
+                  <option key={index} value={getCon.country_name}>
+                    {getCon.country_name}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="State">State:</label>
+              <select
+                className="form-select"
+                name="state"
+                value={credentials.state}
+                onChange={(e) => handleState(e)}
+              >
+                <option value="">Select State</option>
+                {stat.map((val, index) => (
+                  <option key={index} value={val.state_name}>
+                    {val.state_name}
+                  </option>
+                ))}
+              </select>
+              <div className="mb-3">
+                <label htmlFor="City">City:</label>
+                <select
+                  className="form-select "
+                  name="city"
+                  value={credentials.city}
+                  onChange={(e) => handleCity(e)}
+                >
+                  <option value="">Select City</option>
+                  {city.map((val, index) => (
+                    <option key={index} val={val.city_name}>
+                      {val.city_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-3 mt-3">
+                <label htmlFor="Address" className="form-label">
+                  Address:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="address"
+                  name="address"
+                  value={credentials.address}
+                  onChange={onChange}
+                  aria-describedby="addressHelp"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="Pincode" className="form-label">
+                  Pincode
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="pincode"
+                  name="pincode"
+                  value={credentials.pincode}
+                  onChange={onChange}
+                  aria-describedby="pincodeHelp"
+                />
+              </div>
 
-          <div className="mb-3">
-            <label htmlFor="mobile" className="form-label">
-              Mobile Number
-            </label>
-            <input
-              type="text"
-              className="form-control mb-3"
-              id="mobile"
-              name="mobile"
-              value={credentials.mobile}
-              onChange={onChange}
-              aria-describedby="mobile"
-            />
-          </div>
+              <div className="mb-3">
+                <label htmlFor="mobile" className="form-label">
+                  Mobile Number
+                </label>
+                <input
+                  type="text"
+                  className="form-control mb-3"
+                  id="mobile"
+                  name="mobile"
+                  value={credentials.mobile}
+                  onChange={onChange}
+                  aria-describedby="mobile"
+                />
+              </div>
 
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
+              <button type="submit" className="btn btn-primary mb-3">
+                Submit
+              </button>
+            </>
+          )}
+          {message && (
+            <div className="form-group">
+              <div
+                className={
+                  successful ? 'alert alert-success' : 'alert alert-danger'
+                }
+                role="alert"
+              >
+                {message}
+              </div>
+            </div>
+          )}
         </form>
       </div>
     </>

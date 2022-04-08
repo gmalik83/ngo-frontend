@@ -52,7 +52,7 @@ export const Contact = () => {
                 <h6>Support Office</h6>
                 <div className="underline"></div>
                 <p>
-                  North Legion ,Level 1, NIT Kurukshetra <br></br>Haryana 136119
+                  Shiksha ,Level 1, NIT Kurukshetra <br></br>Haryana 136119
                 </p>
               </div>
             </div>
@@ -63,7 +63,7 @@ export const Contact = () => {
                 <h6>Registered Office</h6>
                 <div className="underline"></div>
                 <p>
-                  NL Group , Level 5 , PK Tower <br></br>New Delhi , India
+                  Shiksha Group , Level 5 , PK Tower <br></br>New Delhi , India
                   110045
                 </p>
               </div>
@@ -72,7 +72,7 @@ export const Contact = () => {
         </div>
       </div>
       <div className="container mb-3">
-        <h3>Please leave your contact details , we will find you:</h3>
+        <h3>Please leave your contact details , we will get back to you:</h3>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="Name">Name:</label>

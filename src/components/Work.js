@@ -19,7 +19,7 @@ export const Work = () => {
 
       <section className="section bg-light border-bottom ">
         <div className="container">
-          <h5 className="main-heading">North Legion Initiaves</h5>
+          <h5 className="main-heading">Shiksha Initiaves</h5>
           <div className="underline"></div>
           <p>
             We at North Legion takes our work serious and always encourage our

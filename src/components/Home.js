@@ -6,6 +6,7 @@ import Values from './Values';
 import Service1 from './images/image1.jpg';
 
 export const Home = () => {
+  // UseEffect for Articles
   return (
     <div>
       <Slider />

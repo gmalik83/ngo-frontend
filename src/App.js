@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Home } from './components/Home';
@@ -10,9 +10,12 @@ import { Contact } from './components/Contact';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Footer from './components/Footer';
+import BoardModerator from './components/file/BoardModerator';
+import BoardAdmin from './components/file/BoardAdmin';
+import BoardUser from './components/file/BoardUser';
+import Profile from './components/Profile';
 
-function App() {
-  const [user, setLoginUser] = useState({});
+const App = () => {
   return (
     <>
       <Router>
@@ -25,11 +28,15 @@ function App() {
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/signin" exact element={<Login />} />
           <Route path="/register" exact element={<Register />} />
+          <Route path="/mod" exact element={<BoardModerator />} />
+          <Route path="/admin" exact element={<BoardAdmin />} />
+          <Route path="/user" exact element={<BoardUser />} />
+          <Route path="/profile" exact element={<Profile />} />
         </Routes>
         <Footer />
       </Router>
     </>
   );
-}
+};
 
 export default App;

@@ -1,32 +1,69 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 
-import Footer from '../Footer';
+// import Loading from '../Loading'
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
-  let history = useNavigate();
+  // const form = useRef();
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  let navigate = useNavigate();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
+    setMessage('');
+    setLoading(true);
+
+    AuthService.login(credentials.email, credentials.password).then(
+      () => {
+        navigate('/profile');
+        window.location.reload();
       },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
-    const json = await response.json();
-    console.log(json);
-    if (json.success) {
-      // Save Auth Token and Redirect
-      localStorage.setItem('tokenn', json.authtoken);
-    } else {
-      alert('Invalid credentials');
-    }
+      (error) => {
+        // console.log(error.response.data);
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setLoading(false);
+        setMessage(resMessage);
+      }
+    );
+    setLoading(false);
+
+    // try {
+    //   setLoading(true);
+    //   const response = await fetch('http://localhost:5000/api/auth/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       email: credentials.email,
+    //       password: credentials.password,
+    //     }),
+    //   });
+    //   const { data } = await response.json();
+    //   console.log(data.user);
+    //   setLoading(false);
+
+    //   localStorage.setItem('userInfo', JSON.stringify(data.user));
+    //   // if (json.success) {
+    //   //   // Save Auth Token and Redirect
+    //   //   localStorage.setItem('tokenn', json.authtoken);
+    //   // } else {
+    //   //   alert('Invalid credentials');
+    //   // }
+    // } catch (error) {
+    //   setError(error);
+    //   setLoading(false);
+    // }
   };
 
   const onChange = (e) => {
@@ -36,7 +73,7 @@ const Login = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h3 className="text-center">Please Login Here</h3>
+        <h3 className="text-center mt-2">Please Login Here</h3>
         <div className="mb-3 container">
           <label htmlFor="email" className="form-label">
             Email address
@@ -66,10 +103,28 @@ const Login = () => {
               id="password"
             />
           </div>
-
-          <button type="submit" className="btn btn-primary">
+          <div className="form-group">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+            >
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span>Login</span>
+            </button>
+          </div>
+          {/* <button type="submit" className="btn btn-primary">
             Submit
-          </button>
+          </button> */}
+          {message && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
+            </div>
+          )}
         </div>
       </form>
     </>
