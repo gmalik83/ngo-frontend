@@ -26,13 +26,63 @@ const BoardUser = () => {
         }
       }
     );
+    console.log(content);
   }, []);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
+    <div className="container table-responsive">
+      <h3 className="mt-3 mb-3">All Volunteer Details:</h3>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Country</th>
+            <th scope="col">State</th>
+            <th scope="col">City</th>
+            <th scope="col">Mobile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Gaurav</td>
+            <td>gaurav98malik@gmail.com</td>
+            <td>India</td>
+            <td>Haryana</td>
+            <td>Sonipat</td>
+            <td>8398949984</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Gaurav</td>
+            <td>gaurav98malik@gmail.com</td>
+            <td>India</td>
+            <td>Haryana</td>
+            <td>Sonipat</td>
+            <td>8398949984</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Gaurav</td>
+            <td>gaurav98malik@gmail.com</td>
+            <td>India</td>
+            <td>Haryana</td>
+            <td>Sonipat</td>
+            <td>8398949984</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Gaurav</td>
+            <td>gaurav98malik@gmail.com</td>
+            <td>India</td>
+            <td>Haryana</td>
+            <td>Sonipat</td>
+            <td>8398949984</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
