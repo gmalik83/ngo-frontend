@@ -27,7 +27,6 @@ const BoardUser = () => {
         }
       }
     );
-    console.log(content);
   }, []);
 
   return (
@@ -61,42 +60,6 @@ const BoardUser = () => {
               </tr>
             );
           })}
-          {/* <tr>
-            <td>1</td>
-            <td>Gaurav</td>
-            <td>gaurav98malik@gmail.com</td>
-            <td>India</td>
-            <td>Haryana</td>
-            <td>Sonipat</td>
-            <td>8398949984</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Gaurav</td>
-            <td>gaurav98malik@gmail.com</td>
-            <td>India</td>
-            <td>Haryana</td>
-            <td>Sonipat</td>
-            <td>8398949984</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Gaurav</td>
-            <td>gaurav98malik@gmail.com</td>
-            <td>India</td>
-            <td>Haryana</td>
-            <td>Sonipat</td>
-            <td>8398949984</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Gaurav</td>
-            <td>gaurav98malik@gmail.com</td>
-            <td>India</td>
-            <td>Haryana</td>
-            <td>Sonipat</td>
-            <td>8398949984</td>
-          </tr> */}
         </tbody>
       </table>
     </div>
