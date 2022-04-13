@@ -4,12 +4,13 @@ import UserService from '../services/user.service';
 import EventBus from '../../common/EventBus';
 
 const BoardUser = () => {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState([]);
 
   useEffect(() => {
     UserService.getUserBoard().then(
       (response) => {
         setContent(response.data);
+        console.log(response.data);
       },
       (error) => {
         const _content =
@@ -32,6 +33,8 @@ const BoardUser = () => {
   return (
     <div className="container table-responsive">
       <h3 className="mt-3 mb-3">All Volunteer Details:</h3>
+      {!content.length && <h1>No data available</h1>}
+
       <table className="table">
         <thead>
           <tr>
@@ -45,7 +48,20 @@ const BoardUser = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          {content.map((item, i) => {
+            return (
+              <tr key={i}>
+                <td>{i + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.country}</td>
+                <td>{item.state}</td>
+                <td>{item.city}</td>
+                <td>{item.mobile}</td>
+              </tr>
+            );
+          })}
+          {/* <tr>
             <td>1</td>
             <td>Gaurav</td>
             <td>gaurav98malik@gmail.com</td>
@@ -80,7 +96,7 @@ const BoardUser = () => {
             <td>Haryana</td>
             <td>Sonipat</td>
             <td>8398949984</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
     </div>
