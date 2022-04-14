@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import Modal from './Modal';
 
 import UserService from '../services/user.service';
 
 import EventBus from '../../common/EventBus';
-
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import './styles/boardModerator.css';
 const BoardModerator = () => {
   const [content, setContent] = useState([]);
   const [message, setMessage] = useState('');
-
+  const [modalState, setModalOpen] = useState(false);
+  const [dataId, setDataId] = useState('');
   useEffect(() => {
     UserService.getModeratorBoard().then(
       (response) => {
         if (response.status === 200) {
           setContent(response.data);
-          console.log(response);
+          // console.log(content);
         }
       },
       (error) => {
@@ -32,10 +36,26 @@ const BoardModerator = () => {
     );
   }, []);
 
+  const handleModalToggle = (e) => {
+    e.preventDefault();
+    
+    const id = e.target.dataset.id;
+    if(modalState == false){
+      setDataId(id);
+    }else setDataId('');
+    setModalOpen(!modalState);
+
+    
+
+  }
+
   return (
     <div className="container table-responsive">
       <h3 className="mt-3 mb-3">All Pending Requests:</h3>
       {!content.length && <h1>No data available</h1>}
+      <div className='modalContainer'>
+      {modalState && dataId ? <Modal handleModalToggle ={handleModalToggle} id={dataId}></Modal> : <h1></h1>}
+      </div>
       {!message && (
         <table className="table">
           <thead>
@@ -47,6 +67,7 @@ const BoardModerator = () => {
               <th scope="col">State</th>
               <th scope="col">City</th>
               <th scope="col">Mobile</th>
+              <th scope='col'>Profile</th>
             </tr>
           </thead>
           <tbody>
@@ -60,6 +81,8 @@ const BoardModerator = () => {
                   <td>{item.state}</td>
                   <td>{item.city}</td>
                   <td>{item.mobile}</td>
+                  <td><Link className='btn btn-warning shadow' to='/'  onClick={handleModalToggle} data-id={item._id}>View</Link></td>
+                  
                 </tr>
               );
             })}

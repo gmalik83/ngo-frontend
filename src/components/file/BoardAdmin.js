@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../services/user.service';
 import EventBus from '../../common/EventBus';
+import {Link} from "react-router-dom";
 
 const BoardAdmin = () => {
   //
@@ -48,6 +49,7 @@ const BoardAdmin = () => {
               <th scope="col">State</th>
               <th scope="col">City</th>
               <th scope="col">Mobile</th>
+              <th scope='col'>Profile</th>
             </tr>
           </thead>
           <tbody>
@@ -61,6 +63,7 @@ const BoardAdmin = () => {
                   <td>{item.state}</td>
                   <td>{item.city}</td>
                   <td>{item.mobile}</td>
+                  <td><Link className='btn btn-warning shadow' to='/'>View</Link></td>
                 </tr>
               );
             })}
