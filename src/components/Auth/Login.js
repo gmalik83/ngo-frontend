@@ -23,6 +23,7 @@ const Login = () => {
         window.location.reload();
       },
       (error) => {
+        console.log(error);
         // console.log(error.response.data);
         const resMessage =
           (error.response &&

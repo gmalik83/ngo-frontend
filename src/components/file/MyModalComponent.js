@@ -8,6 +8,8 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   const [userData, setUserData] = useState("");
   // For Component show State
   const [modalState, setModalState] = useState(show);
+  // For Sending Approve or Reject Request 
+  const [userId,setUserId] = useState('');
 
   const handleModal = () => {
     console.log("Something is Clicked!");
@@ -27,7 +29,10 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
 
   // Handle Approve or Reject
   const handleApprove = () => {
-    console.log("Approve is Clicked!");
+    console.log(`Approve is Clicked! ${userData._id}`);
+    
+
+
   };
   const handleReject = () => {
     console.log("Reject is Clicked!");
