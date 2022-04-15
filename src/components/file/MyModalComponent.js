@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import authHeader from "../services/authHeader";
+import { Modal, Button, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 const url = "http://localhost:5000";
 
 const MyModalComponent = ({ show, id, handleModalToggle }) => {
@@ -8,8 +10,12 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   const [userData, setUserData] = useState("");
   // For Component show State
   const [modalState, setModalState] = useState(show);
-  // For Sending Approve or Reject Request 
-  const [userId,setUserId] = useState('');
+  // For Sending Approve or Reject Request
+  const [userId, setUserId] = useState("");
+  // For Loading State
+  const [loading, setLoading] = useState(false);
+  // For Hiding Form
+  const [done, setDone] = useState(false);
 
   const handleModal = () => {
     console.log("Something is Clicked!");
@@ -21,7 +27,9 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
 
   // Function to get data for Particular User
   const getData = async (id) => {
-    const res = await fetch(`${url}/api/user/getmod?id=${id}`);
+    const res = await fetch(`${url}/api/user/getmod?id=${id}`, {
+      headers: authHeader(),
+    });
 
     const data = await res.json();
     setUserData(data);
@@ -30,9 +38,10 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   // Handle Approve or Reject
   const handleApprove = () => {
     console.log(`Approve is Clicked! ${userData._id}`);
-    
-
-
+    axios
+      .post(url + `/api/approve/?id=${userData._id}`)
+      .then((res) => console.log(res.data));
+    setDone(true);
   };
   const handleReject = () => {
     console.log("Reject is Clicked!");
@@ -48,99 +57,105 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
       {userData ? (
         <Modal show={modalState} centered onHide={closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              Details of {userData.name}:
-            </Modal.Title>
+            <Modal.Title>Details of {userData.name}:</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <div className="form-group">
-              <label htmlFor="Name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                value={userData.name}
-                aria-describedby="Name"
-                placeholder="Name"
-                readOnly
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Email">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                value={userData.email}
-                placeholder="Email"
-                readOnly
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Country">Country</label>
-              <input
-                type="text"
-                className="form-control"
-                value={userData.country}
-                aria-describedby="Country"
-                placeholder="Country"
-                readOnly
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="State">State</label>
-              <input
-                type="text"
-                className="form-control"
-                value={userData.state}
-                aria-describedby="State"
-                placeholder="State"
-                readOnly
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="City">City</label>
-              <input
-                type="text"
-                className="form-control"
-                value={userData.city}
-                aria-describedby="City"
-                placeholder="City"
-                readOnly
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Address">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                value={userData.address}
-                aria-describedby="address"
-                placeholder="address"
-                readOnly
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Mobile">Mobile</label>
-              <input
-                type="text"
-                className="form-control"
-                value={userData.mobile}
-                aria-describedby="mobile"
-                placeholder="mobile"
-                readOnly
-              />
-              <div className="form-group">
-                <label htmlFor="Pincode">Pincode</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={userData.pincode}
-                  aria-describedby="Pincode"
-                  placeholder="Pincode"
-                  readOnly
-                />
-              </div>
-            </div>
+            {!done ? (
+              <>
+                <div className="form-group">
+                  <label htmlFor="Name">Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={userData.name}
+                    aria-describedby="Name"
+                    placeholder="Name"
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="Email">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    value={userData.email}
+                    placeholder="Email"
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="Country">Country</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={userData.country}
+                    aria-describedby="Country"
+                    placeholder="Country"
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="State">State</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={userData.state}
+                    aria-describedby="State"
+                    placeholder="State"
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="City">City</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={userData.city}
+                    aria-describedby="City"
+                    placeholder="City"
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="Address">Address</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={userData.address}
+                    aria-describedby="address"
+                    placeholder="address"
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="Mobile">Mobile</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={userData.mobile}
+                    aria-describedby="mobile"
+                    placeholder="mobile"
+                    readOnly
+                  />
+                  <div className="form-group">
+                    <label htmlFor="Pincode">Pincode</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={userData.pincode}
+                      aria-describedby="Pincode"
+                      placeholder="Pincode"
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
           </Modal.Body>
 
           <Modal.Footer>
@@ -156,7 +171,9 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
           </Modal.Footer>
         </Modal>
       ) : (
-        <h2>Something Went Wrong</h2>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
       )}
     </div>
   );
