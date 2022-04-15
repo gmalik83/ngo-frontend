@@ -18,6 +18,11 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   const [done, setDone] = useState(false);
   // Error Message for getUserbyId
   const [message, setMessage] = useState("");
+  // Message after approve
+  const [message1, setMessage1] = useState("");
+
+  // State for Successfull Approval or Deletion
+  const [approve, setApprove] = useState(false);
 
   const handleModal = () => {
     console.log("Something is Clicked!");
@@ -25,6 +30,9 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   };
   const closeModal = () => {
     setModalState(false);
+  };
+  const secondModal = () => {
+    setApprove(false);
   };
 
   // Function to get data for Particular User
@@ -49,24 +57,56 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   const handleApprove = () => {
     // console.log(e.target.name);
     // console.log(`Approve is Clicked! ${userData._id}`);
+
+    // Close This User MODAL
+    setModalState(false);
+    setApprove(true);
+
     axios
       .post(url + `/api/approve/?id=${userData._id}`)
-      .then((res) => console.log(res.data));
-    setDone(true);
+      .then((res) => setMessage1(res.data.message))
+      .catch((error) => {
+        console.log(error);
+        // console.log(error.response.data);
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setMessage1(resMessage);
+      });
   };
   const handleReject = () => {
-    console.log("Reject is Clicked!");
+    // Close Open Modal
+    setModalState(false);
+    setApprove(true);
+    axios
+      .post(url + `/api/deleteUser/?id=${userData._id}`)
+      .then((res) => setMessage1(res.data.message))
+      .catch((error) => {
+        console.log(error);
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setMessage1(resMessage);
+      });
   };
 
   // Call GET for user on Rendering Modal Component and set UserData state
 
   useEffect(() => {
     getData(id);
-  }, [modalState]);
+  }, []);
 
   return (
     <div>
-      {false ? (
+      {userData ? (
         <Modal show={modalState} centered onHide={closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>Details of {userData.name}:</Modal.Title>
@@ -180,22 +220,39 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
         <Modal show={modalState} onHide={closeModal} centered>
           <Modal.Header closeButton>
             <Modal.Title>Something Went Wrong With the server</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <h2>Your Request Cannot be processed.{message}</h2>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="warning" onClick={() => setModalState(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-         
+          </Modal.Header>
+          <Modal.Body>
+            <div className="form-group">
+              <h3>Response From Server:</h3>
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="warning" onClick={() => setModalState(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
         </Modal>
       )}
       {/* /* : (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
       </Spinner> )*/}
+      {approve && (
+        <Modal show={approve} centered onHide={secondModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Status of Request :</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Result : {message1}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="warning" onClick={() => setApprove(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </div>
   );
 };

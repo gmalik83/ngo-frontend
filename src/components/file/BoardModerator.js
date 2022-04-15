@@ -31,7 +31,7 @@ const BoardModerator = () => {
         }
       }
     );
-  }, []);
+  }, [modalState]);
 
   const handleModalToggle = (e) => {
     e.preventDefault();
