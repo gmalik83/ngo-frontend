@@ -34,7 +34,7 @@ const BoardModerator = () => {
   }, []);
 
   const handleModalToggle = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     const id = e.target.dataset.id;
     console.log(id);
