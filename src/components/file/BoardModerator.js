@@ -37,7 +37,7 @@ const BoardModerator = () => {
     e.preventDefault();
 
     const id = e.target.dataset.id;
-    console.log(id);
+    // console.log(id);
     if (modalState == false) {
       setDataId(id);
     } else setDataId("");
