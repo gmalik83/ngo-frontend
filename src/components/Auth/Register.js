@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AuthService from '../services/auth.service';
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
+import { Spinner } from "react-bootstrap";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
-    name: '',
-    email: '',
-    password: '',
-    country: '',
-    state: '',
-    city: '',
-    address: '',
-    pincode: '',
-    mobile: '',
+    name: "",
+    email: "",
+    password: "",
+    country: "",
+    state: "",
+    city: "",
+    address: "",
+    pincode: "",
+    mobile: "",
   });
+  // Loading State for Spinner
+  const [loading, setLoading] = useState(false);
 
   let navigate = useNavigate();
 
@@ -21,30 +24,30 @@ const Register = () => {
   const initialCityRender = useRef(true);
   // Form States
   const [country, setCountry] = useState([]);
-  const [countryName, setCountryName] = useState('');
+  const [countryName, setCountryName] = useState("");
   const [stat, setStat] = useState([]);
-  const [statName, setstatName] = useState('');
+  const [statName, setstatName] = useState("");
   const [city, setCity] = useState([]);
-  const [cityName, setCityName] = useState('');
+  const [cityName, setCityName] = useState("");
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   // Get Token For Country State City API
   const getToken = async () => {
     const token = await fetch(
-      'https://www.universal-tutorial.com/api/getaccesstoken',
+      "https://www.universal-tutorial.com/api/getaccesstoken",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          Accept: 'application/json',
-          'api-token':
-            'ICx-rRFId2aBeh-LhZWJSQkRZEtYjEV_6vgt3JY5uyJqqzt1DBCMFdWNbLicc4RcHts',
-          'user-email': 'gaurav96malik@gmail.com',
+          Accept: "application/json",
+          "api-token":
+            "ICx-rRFId2aBeh-LhZWJSQkRZEtYjEV_6vgt3JY5uyJqqzt1DBCMFdWNbLicc4RcHts",
+          "user-email": "gaurav96malik@gmail.com",
         },
       }
     );
     const finalToken = (await token.json()).auth_token;
-    localStorage.setItem('token', finalToken);
+    localStorage.setItem("token", finalToken);
     return finalToken;
   };
 
@@ -54,12 +57,12 @@ const Register = () => {
     const getCountry = async () => {
       const token = await getToken();
       const countries = await fetch(
-        'https://www.universal-tutorial.com/api/countries/',
+        "https://www.universal-tutorial.com/api/countries/",
         {
-          method: 'GET',
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
+            Accept: "application/json",
           },
         }
       );
@@ -92,15 +95,15 @@ const Register = () => {
   useEffect(() => {
     if (initialStateRender.current) initialStateRender.current = false;
     else {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const getState = async () => {
         const resState = await fetch(
           `https://www.universal-tutorial.com/api/states/${countryName}`,
           {
-            method: 'GET',
+            method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
-              Accept: 'application/json',
+              Accept: "application/json",
             },
           }
         );
@@ -116,15 +119,15 @@ const Register = () => {
   useEffect(() => {
     if (initialCityRender.current) initialCityRender.current = false;
     else {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const getCity = async () => {
         const resCity = await fetch(
           `https://www.universal-tutorial.com/api/cities/${statName}`,
           {
-            method: 'GET',
+            method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
-              Accept: 'application/json',
+              Accept: "application/json",
             },
           }
         );
@@ -141,8 +144,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
+    setMessage("");
     setSuccessful(false);
+    setLoading(true);
 
     AuthService.register(
       credentials.name,
@@ -156,10 +160,11 @@ const Register = () => {
       credentials.mobile
     ).then(
       (response) => {
-        navigate('/profile');
-        window.location.reload();
+        // navigate('/profile');
+        // window.location.reload();
         setMessage(response.data.message);
         setSuccessful(true);
+        setLoading(false);
       },
       (error) => {
         const resMessage =
@@ -170,6 +175,7 @@ const Register = () => {
           error.toString();
         setMessage(resMessage);
         setSuccessful(false);
+        setLoading(false);
       }
     );
     // const response = await fetch('http://localhost:5000/api/auth/register ', {
@@ -325,17 +331,26 @@ const Register = () => {
                   aria-describedby="mobile"
                 />
               </div>
-
-              <button type="submit" className="btn btn-primary mb-3">
-                Submit
-              </button>
+              {loading ? (
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                <button
+                  type="submit"
+                  className="btn btn-primary mb-3"
+                  disabled={loading}
+                >
+                  Submit
+                </button>
+              )}
             </>
           )}
           {message && (
             <div className="form-group">
               <div
                 className={
-                  successful ? 'alert alert-success' : 'alert alert-danger'
+                  successful ? "alert alert-success" : "alert alert-danger"
                 }
                 role="alert"
               >

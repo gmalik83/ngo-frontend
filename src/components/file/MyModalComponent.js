@@ -30,6 +30,7 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   };
   const closeModal = () => {
     setModalState(false);
+    handleModalToggle();
   };
   const secondModal = () => {
     setApprove(false);
@@ -211,7 +212,7 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
             <Button variant="danger" onClick={handleReject}>
               Reject
             </Button>
-            <Button variant="warning" onClick={() => setModalState(false)}>
+            <Button variant="warning" onClick={closeModal}>
               Close
             </Button>
           </Modal.Footer>

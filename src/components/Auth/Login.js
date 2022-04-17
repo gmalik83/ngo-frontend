@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AuthService from '../services/auth.service';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
+import { Spinner } from "react-bootstrap";
 
 // import Loading from '../Loading'
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   // const form = useRef();
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setMessage('');
+    setMessage("");
     setLoading(true);
 
     AuthService.login(credentials.email, credentials.password).then(
       () => {
-        navigate('/profile');
+        navigate("/profile");
         window.location.reload();
+        setLoading(false);
       },
       (error) => {
         console.log(error);
@@ -36,7 +38,7 @@ const Login = () => {
         setMessage(resMessage);
       }
     );
-    setLoading(false);
+    
 
     // try {
     //   setLoading(true);
@@ -104,21 +106,22 @@ const Login = () => {
               id="password"
             />
           </div>
-          <div className="form-group">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={loading}
-            >
-              {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
-              )}
-              <span>Login</span>
-            </button>
-          </div>
-          {/* <button type="submit" className="btn btn-primary">
-            Submit
-          </button> */}
+          {loading? (
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            <div className="form-group">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={loading}
+              >
+                Login
+              </button>
+            </div>
+          )}
+
           {message && (
             <div className="form-group">
               <div className="alert alert-danger" role="alert">

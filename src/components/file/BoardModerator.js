@@ -33,8 +33,15 @@ const BoardModerator = () => {
     );
   }, [modalState]);
 
+  const changeModal = () => {
+    console.log(modalState)
+    setModalState(!modalState);
+    setDataId('');
+  }
+
   const handleModalToggle = (e) => {
-    e.preventDefault();
+    console.log('im here')
+    
 
     const id = e.target.dataset.id;
     // console.log(id);
@@ -54,7 +61,7 @@ const BoardModerator = () => {
         {modalState && dataId ? (
           <MyModalComponent show={modalState}
             id={dataId}
-            handleModalToggle={handleModalToggle}
+            handleModalToggle={changeModal}
           ></MyModalComponent>
         ):<></>}
       
