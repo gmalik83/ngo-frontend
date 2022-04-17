@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import authHeader from "../services/authHeader";
-import { Modal, Button, Spinner } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 const url = "http://localhost:5000";
@@ -11,11 +11,11 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   // For Component show State
   const [modalState, setModalState] = useState(show);
   // For Sending Approve or Reject Request
-  const [userId, setUserId] = useState("");
+  // const [userId, setUserId] = useState("");
   // For Loading State
-  const [loading, setLoading] = useState(false);
-  // For Hiding Form
-  const [done, setDone] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // // For Hiding Form
+  // const [done, setDone] = useState(false);
   // Error Message for getUserbyId
   const [message, setMessage] = useState("");
   // Message after approve
@@ -24,10 +24,7 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   // State for Successfull Approval or Deletion
   const [approve, setApprove] = useState(false);
 
-  const handleModal = () => {
-    console.log("Something is Clicked!");
-    setModalState(false);
-  };
+ 
   const closeModal = () => {
     setModalState(false);
     handleModalToggle();
@@ -38,6 +35,7 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
 
   // Function to get data for Particular User
   const getData = async (id) => {
+    // setLoading(true);
     const res = await fetch(`${url}/api/user/getmod?id=${id}`, {
       headers: authHeader(),
     });
@@ -46,11 +44,15 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
     // If Resource Not Found then display message
     if (res.status === 200) {
       setUserData(data);
+      
     } else if (res.status === 404) {
       setMessage(data.message);
+      
     } else {
       setMessage("Something Went Wrong With Server:500");
+      
     }
+
     // setUserData(data);
   };
 
@@ -64,7 +66,9 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
     setApprove(true);
 
     axios
-      .post(url + `/api/approve/?id=${userData._id}`)
+      .post(url + `/api/approve/?id=${userData._id}`, {
+        headers: authHeader(),
+      })
       .then((res) => setMessage1(res.data.message))
       .catch((error) => {
         console.log(error);
@@ -84,7 +88,9 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
     setModalState(false);
     setApprove(true);
     axios
-      .post(url + `/api/deleteUser/?id=${userData._id}`)
+      .post(url + `/api/deleteUser/?id=${userData._id}`, {
+        headers: authHeader(),
+      })
       .then((res) => setMessage1(res.data.message))
       .catch((error) => {
         console.log(error);
@@ -237,10 +243,7 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
           </Modal.Footer>
         </Modal>
       )}
-      {/* /* : (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-      </Spinner> )*/}
+
       {approve && (
         <Modal show={approve} centered onHide={secondModal}>
           <Modal.Header closeButton>

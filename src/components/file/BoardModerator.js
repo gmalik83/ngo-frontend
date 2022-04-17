@@ -5,19 +5,28 @@ import UserService from "../services/user.service";
 
 import EventBus from "../../common/EventBus";
 const BoardModerator = () => {
+  // Array for Display Pending Requests
   const [content, setContent] = useState([]);
+  // Set Message
   const [message, setMessage] = useState("");
+  // For Open/Close MODAL State
   const [modalState, setModalState] = useState(false);
+  // UserID for Pending Request Item
   const [dataId, setDataId] = useState("");
+  // Call this when Component Render
+
   useEffect(() => {
     UserService.getModeratorBoard().then(
       (response) => {
+        // If Response if OK
         if (response.status === 200) {
+          // Response.data is array of pending requests
+          // Send this in Content Array
           setContent(response.data);
-          // console.log(content);
         }
       },
       (error) => {
+        // Set resMessage to Error , if it exists
         const resMessage =
           (error.response &&
             error.response.data &&
@@ -27,45 +36,53 @@ const BoardModerator = () => {
 
         setMessage(resMessage);
         if (error.response && error.response.status === 403) {
+          // If Forbidden then Logout User
           EventBus.dispatch("logout");
         }
       }
     );
-  }, [modalState]);
+  }, []);
 
+  // Toggle  modalState
   const changeModal = () => {
-    console.log(modalState)
+    // Invert modalState
     setModalState(!modalState);
-    setDataId('');
-  }
+    // Set dataId to NULL
+    setDataId("");
+  };
 
+  // Handling ModalToggle
   const handleModalToggle = (e) => {
-    console.log('im here')
-    
-
+    // Id of Selected user in table
     const id = e.target.dataset.id;
     // console.log(id);
-    if (modalState == false) {
+    // Only if Modal is Closed then setData Id  (Only Set if ModalState is true)
+    if (modalState === false) {
       setDataId(id);
     } else setDataId("");
-    console.log(`Changing Modal State to ${!modalState}`);
+    // Invert ModalState on Toggle
     setModalState(!modalState);
-    
   };
 
   return (
     <div className="container table-responsive">
       <h3 className="mt-3 mb-3">All Pending Requests:</h3>
-      {!content.length && <h1>No data available</h1>}
-      
-        {modalState && dataId ? (
-          <MyModalComponent show={modalState}
-            id={dataId}
-            handleModalToggle={changeModal}
-          ></MyModalComponent>
-        ):<></>}
-      
-      {!message && (
+      {/*If Content array is NULL*/}
+      {!content.length && (
+        <h1 className="text-center mt-4 mb-4">
+          No Requests available
+        </h1>
+      )}
+
+      {modalState && dataId && (
+        <MyModalComponent
+          show={modalState}
+          id={dataId}
+          handleModalToggle={changeModal}
+        ></MyModalComponent>
+      )}
+
+      {content.length ? (
         <table className="table">
           <thead>
             <tr>
@@ -104,6 +121,8 @@ const BoardModerator = () => {
             })}
           </tbody>
         </table>
+      ) : (
+        <></>
       )}
       {message && (
         <div className="form-group">

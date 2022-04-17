@@ -8,12 +8,12 @@ const getPublicContent = () => {
   return axios.get(API_URL + 'all');
 };
 
-// Private Route
+// Private Route for User Board
 const getUserBoard = () => {
   return axios.get(API_URL + 'user', { headers: authHeader() });
 };
 
-// Moderator Board
+// Moderator Board : Send GET request with authHeader() : JWT token
 const getModeratorBoard = () => {
   return axios.get(API_URL + 'mod', { headers: authHeader() });
 };
