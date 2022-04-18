@@ -26,9 +26,6 @@ const register = (
       mobile,
     })
     .then((response) => {
-      if (response.data.name) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
       return response.data;
     });
 };
