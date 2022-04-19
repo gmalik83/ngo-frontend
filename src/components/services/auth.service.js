@@ -1,29 +1,55 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:5000/api/auth/';
+const API_URL = "http://localhost:5000/api/auth/";
 
 const register = (
-  name,
-  email,
-  password,
+  firstname,
+  lastname,
+  age,
+  father,
+  mother,
+  hno,
+  postoffice,
+  block,
+  tehsil,
   country,
   state,
-  city,
-  address,
+  district,
   pincode,
-  mobile
+  special,
+  graduation,
+  xii,
+  skill,
+  service,
+  mobile,
+  email,
+  password,
+  address1
 ) => {
   return axios
-    .post(API_URL + 'register', {
-      name,
-      email,
-      password,
+    .post(API_URL + "register", {
+      firstname,
+      lastname,
+      age,
+      father,
+      mother,
+      hno,
+      postoffice,
+      block,
+      tehsil,
       country,
       state,
-      city,
-      address,
+      district,
       pincode,
+      special,
+      graduation,
+      xii,
+      skill,
+      service,
       mobile,
+      email,
+      password,
+      address1,
     })
     .then((response) => {
       return response.data;
@@ -32,13 +58,13 @@ const register = (
 
 const login = (email, password) => {
   return axios
-    .post(API_URL + 'login', {
+    .post(API_URL + "login", {
       email,
       password,
     })
     .then((response) => {
       if (response.data.name) {
-        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data));
       }
 
       return response.data;
@@ -47,14 +73,14 @@ const login = (email, password) => {
 
 const logout = () => {
   // Remove User From Local Storage
-  localStorage.removeItem('user');
+  localStorage.removeItem("user");
   // return axios.post(API_URL + 'signout').then((response) => {
   //   return response.data;
   // });
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem('user'));
+  return JSON.parse(localStorage.getItem("user"));
 };
 
 const AuthService = {

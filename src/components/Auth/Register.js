@@ -5,15 +5,29 @@ import { Spinner } from "react-bootstrap";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
-    name: "",
-    email: "",
-    password: "",
+    firstname: "",
+    lastname: "",
+    age: "",
+    father: "",
+    mother: "",
+    hno: "",
+    postoffice: "",
+    block: "",
+    tehsil: "",
     country: "",
     state: "",
-    city: "",
-    address: "",
+    district: "",
     pincode: "",
+    email: "",
+    password: "",
+    address: "",
+    special: "",
     mobile: "",
+    graduation: "",
+    xii: "",
+    skill: "",
+    service: "",
+    address1: "",
   });
   // Loading State for Spinner
   const [loading, setLoading] = useState(false);
@@ -149,15 +163,28 @@ const Register = () => {
     setLoading(true);
 
     AuthService.register(
-      credentials.name,
-      credentials.email,
-      credentials.password,
+      credentials.firstname,
+      credentials.lastname,
+      credentials.age,
+      credentials.father,
+      credentials.mother,
+      credentials.hno,
+      credentials.postoffice,
+      credentials.block,
+      credentials.tehsil,
       credentials.country,
       credentials.state,
-      credentials.city,
-      credentials.address,
+      credentials.district,
       credentials.pincode,
-      credentials.mobile
+      credentials.special,
+      credentials.graduation,
+      credentials.xii,
+      credentials.skill,
+      credentials.service,
+      credentials.mobile,
+      credentials.email,
+      credentials.password,
+      credentials.address1
     ).then(
       (response) => {
         // navigate('/profile');
@@ -178,71 +205,130 @@ const Register = () => {
         setLoading(false);
       }
     );
-    // const response = await fetch('http://localhost:5000/api/auth/register ', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     name: credentials.name,
-    //     email: credentials.email,
-    //     password: credentials.password,
-    //     country: credentials.country,
-    //     state: credentials.state,
-    //     city: credentials.city,
-    //     address: credentials.address,
-    //     pincode: credentials.pincode,
-    //     mobile: credentials.mobile,
-    //   }),
-    // });
-    // const json = await response.json();
-    // console.log(json);
-    // if (json.success) {
-    //   // Save Auth Token and Redirect
-    //   localStorage.setItem('tokenn', json.authtoken);
-    //   history.push('/');
-    // } else {
-    //   alert('Invalid Credentials');
-    // }
   };
 
   return (
     <>
       <div className="container mb-3">
-        <h3 className="mt-3">Please Enter Your Details Here:</h3>
+        <h3 className="mt-3 mb-3">Please Enter Your Details Here:</h3>
         <form onSubmit={handleSubmit}>
           {!successful && (
             <>
+              <div className="row mb-3">
+                <div className="col">
+                  <input
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    className="form-control"
+                    placeholder="First name"
+                    value={credentials.firstname}
+                    onChange={onChange}
+                  />
+                </div>
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Last name"
+                    name="lastname"
+                    id="lastname"
+                    value={credentials.lastname}
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
               <div className="form-group">
-                <label htmlFor="Name">Name:</label>
+                <label htmlFor="Age ">Age:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="age"
+                  name="age"
+                  min="18"
+                  max="75"
+                  value={credentials.age}
+                  onChange={onChange}
+                  aria-describedby="age"
+                />
+              </div>
+              <div className="row mb-3">
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Father's name"
+                    id="father"
+                    name="father"
+                    value={credentials.father}
+                    onChange={onChange}
+                  />
+                </div>
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Mother's name"
+                    id="mother"
+                    name="mother"
+                    value={credentials.mother}
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+              <hr></hr>
+              <h4 className="text-center">Native Address:</h4>
+              <div className="mb-3 mt-3">
+                <label htmlFor="Address" className="form-label">
+                  Village/Area/House No.:
+                </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="name"
-                  name="name"
-                  value={credentials.name}
+                  id="hno"
+                  name="hno"
+                  value={credentials.hno}
                   onChange={onChange}
+                  aria-describedby="HouseNumber"
                 />
               </div>
               <div>
-                <label htmlFor="Email">Email:</label>
+                <label htmlFor="Post Office" className="form-label">
+                  Post Office:
+                </label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={credentials.email}
-                  onChange={onChange}
+                  type="text"
                   className="form-control"
+                  id="postOffice"
+                  name="postoffice"
+                  value={credentials.postoffice}
+                  onChange={onChange}
+                  aria-describedby="PostOffice"
                 />
               </div>
-              <label htmlFor="Password">Password:</label>
+              <label htmlFor="block" className="form-label">
+                Block:
+              </label>
               <input
-                type="password"
-                id="password"
-                name="password"
-                value={credentials.password}
-                onChange={onChange}
+                type="text"
                 className="form-control"
+                id="block"
+                name="block"
+                value={credentials.block}
+                onChange={onChange}
+                aria-describedby="Block"
+              />
+              <label htmlFor="tehsil" className="form-label">
+                Tehsil:
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="tehsil"
+                name="tehsil"
+                value={credentials.tehsil}
+                onChange={onChange}
+                aria-describedby="Tehsil"
               />
               <label htmlFor="Country">Country:</label>
               <select
@@ -273,34 +359,20 @@ const Register = () => {
                 ))}
               </select>
               <div className="mb-3">
-                <label htmlFor="City">City:</label>
+                <label htmlFor="City">District:</label>
                 <select
                   className="form-select "
-                  name="city"
-                  value={credentials.city}
+                  name="district"
+                  value={credentials.district}
                   onChange={(e) => handleCity(e)}
                 >
-                  <option value="">Select City</option>
+                  <option value="">Select District</option>
                   {city.map((val, index) => (
                     <option key={index} val={val.city_name}>
                       {val.city_name}
                     </option>
                   ))}
                 </select>
-              </div>
-              <div className="mb-3 mt-3">
-                <label htmlFor="Address" className="form-label">
-                  Address:
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="address"
-                  name="address"
-                  value={credentials.address}
-                  onChange={onChange}
-                  aria-describedby="addressHelp"
-                />
               </div>
               <div className="mb-3">
                 <label htmlFor="Pincode" className="form-label">
@@ -316,7 +388,75 @@ const Register = () => {
                   aria-describedby="pincodeHelp"
                 />
               </div>
+              <hr></hr>
+              <h4 className="text-center">
+                Educational and Professional Details
+              </h4>
+              <hr></hr>
 
+              <label htmlFor="Area of Specialization and Achievement(if any)">
+                Area of Specialization and Achievement (if any):
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="special"
+                name="special"
+                value={credentials.special}
+                onChange={onChange}
+              />
+              <div className="mt-2">
+                <label htmlFor="Graduation:">Graduation in:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="graduation"
+                  name="graduation"
+                  value={credentials.graduation}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="mt-2">
+                <label htmlFor="12th in:">12th in:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="xii"
+                  name="xii"
+                  value={credentials.xii}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="mt-2">
+                <label htmlFor="Any Special Skill:">
+                  Any special education/skill/certificate:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="skill"
+                  name="skill"
+                  value={credentials.skill}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="mt-2">
+                <label htmlFor="service">
+                  If in Government Job/Private Job/Professional (Write the
+                  details. i.e. department, post etc.):
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="service"
+                  name="service"
+                  value={credentials.service}
+                  onChange={onChange}
+                />
+              </div>
+              <hr></hr>
+              <h4 className="text-center">Contact Details:</h4>
+              <hr></hr>
               <div className="mb-3">
                 <label htmlFor="mobile" className="form-label">
                   Mobile Number
@@ -331,6 +471,49 @@ const Register = () => {
                   aria-describedby="mobile"
                 />
               </div>
+
+              <div>
+                <label htmlFor="Email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={credentials.email}
+                  onChange={onChange}
+                  className="form-control"
+                />
+              </div>
+              <label htmlFor="Password">Set Password for Later Use:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={credentials.password}
+                onChange={onChange}
+                className="form-control"
+              />
+              <div className="mb-3 mt-3">
+                <label htmlFor="Correspondence Address" className="form-label">
+                  Correspondence Address
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="address1"
+                  name="address1"
+                  value={credentials.address1}
+                  onChange={onChange}
+                  aria-describedby="addressHelp"
+                />
+              </div>
+
+              <h5>
+                I hereby declare that I have gone through the basic code of
+                conduct of the society and my activities will be as per
+                organization's code of conduct and Indian constitutional
+                provision. 
+              </h5>
+
               {loading ? (
                 <Spinner animation="border" role="status">
                   <span className="visually-hidden">Loading...</span>
