@@ -162,7 +162,6 @@ const Register = () => {
       (response) => {
         // navigate('/profile');
         // window.location.reload();
-        console.log(response);
         setMessage(response.message);
         setSuccessful(true);
         setLoading(false);
