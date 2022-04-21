@@ -14,7 +14,8 @@ const Profile = () => {
     <div className="container w-75 mt-4">
       {userData ? (
         <>
-        <h2>Following details are available :</h2>
+          {console.log(userData)}
+          <h2>Following details are available :</h2>
           <div className="form-group">
             <label htmlFor="Name">Name</label>
             <input
@@ -59,7 +60,7 @@ const Profile = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="City">City</label>
+            <label htmlFor="District">District</label>
             <input
               type="text"
               className="form-control"

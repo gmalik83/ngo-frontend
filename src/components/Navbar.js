@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import img1 from './images/images.png';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import img1 from "../images/NITKKR_logo.png";
+import { Button } from "react-bootstrap";
 
-import AuthService from './services/auth.service';
+import AuthService from "./services/auth.service";
 // import EventBus from '../common/EventBus';
 
 export const Navbar = () => {
@@ -15,11 +16,12 @@ export const Navbar = () => {
   // Check User When component loads
   useEffect(() => {
     const user = AuthService.getCurrentUser();
+    setCurrentUser(user);
     // If User is logged in , then change state according to User Role
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes('ROLE_MODERATOR'));
-      setShowAdminBoard(user.roles.includes('ROLE_ADMIN'));
+      setShowModeratorBoard(user.level >= 1 && user.level <= 6);
+      setShowAdminBoard(user.level === 1);
     }
     // EventBus.on('logout', () => {
     //   logOut();
@@ -41,21 +43,29 @@ export const Navbar = () => {
       {/* Container for Logo and Headline */}
       <div className="container">
         <div className="row ">
-          <div className="col-md-4" style={{ padding: '0px' }}>
+          <div className="col-md-12" style={{ padding: "0px" }}>
             <img
               src={img1}
               alt="Logo"
-              style={{ width: '80%', height: '150px' }}
+              style={{
+                width: "150px",
+                height: "100px",
+                float: "left",
+                marginRight: "15px",
+              }}
             />
-          </div>
-          <div className="col-md-8 mt-4">
-            <h3>Shiksha : A Initiative for helping those in need</h3>
+            <h1 className="ht1">
+              Shiksha : A Initiative for helping those in need
+            </h1>
+            <h3 className="ht4">We are empowering Students</h3>
           </div>
         </div>
       </div>
+      {/* Header Ended */}
       {/* Navbar Starts */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container-fluid">
+      <div>
+      <nav className="navbar navbar-expand-lg navbar-dark custom-class1">
+        <div>
           {/* <Link className="navbar-brand" to="/">
             Siksha
           </Link> */}
@@ -71,52 +81,92 @@ export const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 custom-class1">
               <li className="nav-item px-4">
-                <Link className="nav-link active" aria-current="page" to="/">
+                <Link className="nav-link custom-class2" aria-current="page" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item px-4">
-                <Link className="nav-link" to="/work">
-                  Our Work
+                <Link className="nav-link" to="/about">
+                  About Organization
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/education">
+                  Education
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/csr">
+                  Institution CSR
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/admission">
+                  Admission
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/employment">
+                  Employment
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/sports">
+                  Sports
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/overseas">
+                  Overseas
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/center">
+                  Center of Excellence
+                </Link>
+              </li>
+              <li className="nav-item px-4">
+                <Link className="nav-link" to="/contact">
+                  Contact Us
                 </Link>
               </li>
               {showModeratorBoard && (
                 <li className="nav-item px-4">
                   <Link to="/mod" className="nav-link">
-                    Moderator
+                    Administration
                   </Link>
                 </li>
               )}
-              {showAdminBoard && (
+              {/* {showAdminBoard && (
                 <li className="nav-item px-4">
                   <Link to="/admin" className="nav-link">
                     Admin
                   </Link>
                 </li>
-              )}
-              {currentUser && (
+              )} */}
+              {/* {currentUser && (
                 <li className="nav-item px-4">
                   <Link to="/user" className="nav-link">
                     User
                   </Link>
                 </li>
-              )}
+              )} */}
               {currentUser ? (
                 <div className="navbar-nav">
                   <li className="nav-item px-4">
                     <Link to="/profile" className="nav-link">
-                      {currentUser.name}
+                      {currentUser.firstName}
                     </Link>
                   </li>
                   <li className="nav-item px-4">
                     <Link
                       to="/"
-                      className="nav-link justify-content-end"
+                      className="nav-link justify-content-end btn btn-danger"
                       onClick={logOut}
                     >
-                      LogOut
+                      Log Out
                     </Link>
                   </li>
                 </div>
@@ -164,20 +214,13 @@ export const Navbar = () => {
                 </li>
               )}
 
-              <li className="nav-item px-4">
-                <Link className="nav-link" to="/about">
-                  About Us
-                </Link>
-              </li>
-              <li className="nav-item px-4">
-                <Link className="nav-link" to="/contact">
-                  Contact Us
-                </Link>
-              </li>
+            
+              
             </ul>
           </div>
         </div>
       </nav>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import { Spinner } from "react-bootstrap";
@@ -10,8 +10,17 @@ const Login = () => {
   // const form = useRef();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
 
   let navigate = useNavigate();
+
+  // Check if User is already logged in when Login Component Reloads
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setLoginMessage("You are already Logged in.");
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,35 +47,6 @@ const Login = () => {
         setMessage(resMessage);
       }
     );
-    
-
-    // try {
-    //   setLoading(true);
-    //   const response = await fetch('http://localhost:5000/api/auth/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       email: credentials.email,
-    //       password: credentials.password,
-    //     }),
-    //   });
-    //   const { data } = await response.json();
-    //   console.log(data.user);
-    //   setLoading(false);
-
-    //   localStorage.setItem('userInfo', JSON.stringify(data.user));
-    //   // if (json.success) {
-    //   //   // Save Auth Token and Redirect
-    //   //   localStorage.setItem('tokenn', json.authtoken);
-    //   // } else {
-    //   //   alert('Invalid credentials');
-    //   // }
-    // } catch (error) {
-    //   setError(error);
-    //   setLoading(false);
-    // }
   };
 
   const onChange = (e) => {
@@ -75,62 +55,70 @@ const Login = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <h3 className="text-center mt-2">Please Login Here</h3>
-        <div className="mb-3 container">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control mb-3"
-            value={credentials.email}
-            onChange={onChange}
-            id="email"
-            name="email"
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
+      {loginMessage ? (
+        <div className="form-group">
+          <div className="alert alert-danger" role="alert">
+            {loginMessage}
           </div>
-          <div className="mb-3">
-            <label htmlFor="Password" className="form-label">
-              Password
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <h3 className="text-center mt-2">Please Login Here</h3>
+          <div className="mb-3 container">
+            <label htmlFor="email" className="form-label">
+              Email address
             </label>
             <input
-              type="password"
-              className="form-control"
-              value={credentials.password}
+              type="email"
+              className="form-control mb-3"
+              value={credentials.email}
               onChange={onChange}
-              name="password"
-              id="password"
+              id="email"
+              name="email"
+              aria-describedby="emailHelp"
             />
-          </div>
-          {loading? (
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          ) : (
-            <div className="form-group">
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={loading}
-              >
-                Login
-              </button>
+            <div id="emailHelp" className="form-text">
+              We'll never share your email with anyone else.
             </div>
-          )}
-
-          {message && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {message}
+            <div className="mb-3">
+              <label htmlFor="Password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                value={credentials.password}
+                onChange={onChange}
+                name="password"
+                id="password"
+              />
+            </div>
+            {loading ? (
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            ) : (
+              <div className="form-group">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={loading}
+                >
+                  Login
+                </button>
               </div>
-            </div>
-          )}
+            )}
+          </div>
+        </form>
+      )}
+
+      {message && (
+        <div className="form-group">
+          <div className="alert alert-danger" role="alert">
+            {message}
+          </div>
         </div>
-      </form>
+      )}
     </>
   );
 };

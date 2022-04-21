@@ -1,15 +1,17 @@
-import React from 'react';
-import Articles from './Articles';
-import Slider from './Slider';
-import { Link } from 'react-router-dom';
-import Values from './Values';
-import Service1 from './images/image1.jpg';
+import React from "react";
+import Articles from "./Articles";
+import Slider from "./Slider";
+import { Link } from "react-router-dom";
+import Values from "./Values";
+import Service1 from "./images/image1.jpg";
+import Announcement from "./Announcement";
 
 export const Home = () => {
   // UseEffect for Articles
   return (
     <div>
       <Slider />
+     
       <Articles />
       <section className="section">
         <div className="container">

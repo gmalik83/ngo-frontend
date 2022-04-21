@@ -20,7 +20,6 @@ const Register = () => {
     pincode: "",
     email: "",
     password: "",
-    address: "",
     special: "",
     mobile: "",
     graduation: "",
@@ -239,7 +238,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="Age ">Age:</label>
+                <label htmlFor="Age ">Age (आयु):</label>
                 <input
                   type="number"
                   className="form-control"

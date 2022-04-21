@@ -63,7 +63,7 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.name) {
+      if (response.data.firstName) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 
@@ -72,11 +72,8 @@ const login = (email, password) => {
 };
 
 const logout = () => {
-  // Remove User From Local Storage
   localStorage.removeItem("user");
-  // return axios.post(API_URL + 'signout').then((response) => {
-  //   return response.data;
-  // });
+ 
 };
 
 const getCurrentUser = () => {

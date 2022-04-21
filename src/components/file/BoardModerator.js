@@ -66,7 +66,7 @@ const BoardModerator = () => {
 
   return (
     <div className="container table-responsive">
-      <h3 className="mt-3 mb-3">All Pending Requests:</h3>
+      <h3 className="mt-3 mb-3">All Volunteer Details:</h3>
       {/*If Content array is NULL*/}
       {!content.length && (
         <h1 className="text-center mt-4 mb-4">
@@ -91,7 +91,7 @@ const BoardModerator = () => {
               <th scope="col">Email</th>
               <th scope="col">Country</th>
               <th scope="col">State</th>
-              <th scope="col">City</th>
+              <th scope="col">District</th>
               <th scope="col">Mobile</th>
               <th scope="col">Profile</th>
             </tr>
@@ -101,11 +101,11 @@ const BoardModerator = () => {
               return (
                 <tr key={i}>
                   <td>{i + 1}</td>
-                  <td>{item.name}</td>
+                  <td>{item.firstName}</td>
                   <td>{item.email}</td>
                   <td>{item.country}</td>
                   <td>{item.state}</td>
-                  <td>{item.city}</td>
+                  <td>{item.district}</td>
                   <td>{item.mobile}</td>
                   <td>
                     <button
