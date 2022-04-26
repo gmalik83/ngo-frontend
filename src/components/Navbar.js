@@ -314,12 +314,12 @@ export const Navbar = () => {
                   >
                     <li>
                       <Link className="dropdown-item" to="/page/19">
-                        Education Opportunities
+                        Education
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/page/20">
-                        Employment Based Opportunities
+                        Employment
                       </Link>
                     </li>
                   </ul>
