@@ -3,6 +3,7 @@ import authHeader from "./authHeader"; // For JWT Token
 
 const API_URL = "http://localhost:5000/api/test/";
 const API_URL1 = "http://localhost:5000/";
+const API_URL2 = "http://localhost:5000/page/";
 
 // Public Access
 const getPublicContent = () => {
@@ -26,18 +27,21 @@ const getAdminBoard = () => {
 const getArticles = () => {
   return axios.get(API_URL1 + "articles");
 };
-const getAnnouncement = ()=>{
-  return axios.get(API_URL1+"announcements");
-}
-const getImages = () =>{
-  return axios.get(API_URL1+"images");
-}
-const getValues = () =>{
-  return axios.get(API_URL1+"values");
-}
-const getServices = ()=>{
-  return axios.get(API_URL1+"services");
-}
+const getAnnouncement = () => {
+  return axios.get(API_URL1 + "announcements");
+};
+const getImages = () => {
+  return axios.get(API_URL1 + "images");
+};
+const getValues = () => {
+  return axios.get(API_URL1 + "values");
+};
+const getServices = () => {
+  return axios.get(API_URL1 + "services");
+};
+const getPage = (Id) => {
+  return axios.get(`${API_URL2}`+`${Id}`);
+};
 const UserService = {
   getPublicContent,
   getUserBoard,
@@ -47,7 +51,8 @@ const UserService = {
   getAnnouncement,
   getImages,
   getValues,
-  getServices
+  getServices,
+  getPage,
 };
 
 export default UserService;
