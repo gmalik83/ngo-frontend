@@ -1,0 +1,6 @@
+.panel1 > a,
+.panel1 > a:hover {
+  text-decoration: none;
+  color: #1285c6;
+  font-size: 18px;
+}

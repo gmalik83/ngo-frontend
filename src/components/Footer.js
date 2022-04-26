@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -21,12 +21,6 @@ const Footer = () => {
           </Link>
           <Link to="/" className="me-4 text-reset">
             <i className="fa fa-instagram"></i>
-          </Link>
-          <Link to="/" className="me-4 text-reset">
-            <i className="fa fa-linkedin"></i>
-          </Link>
-          <Link to="/" className="me-4 text-reset">
-            <i className="fa fa-github"></i>
           </Link>
         </div>
       </section>

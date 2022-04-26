@@ -1,5 +1,5 @@
-import React from 'react';
-import Values from './Values';
+import React, { useState, useEffect } from "react";
+import Values from "./Values";
 
 export const About = () => {
   return (

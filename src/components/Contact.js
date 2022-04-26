@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import AuthService from "./services/auth.service";
+import { Spinner } from "react-bootstrap";
 
 export const Contact = () => {
+  const [message, setMessage] = useState("");
+  const [successful, setSuccessful] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [details, setDetails] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const onChange = (e) => {
     setDetails({
@@ -14,20 +19,26 @@ export const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/api/form/contact', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
+    AuthService.contact(details.name, details.email, details.message).then(
+      (response) => {
+        setMessage(response);
+        setSuccessful(true);
+        setLoading(false);
       },
-      body: JSON.stringify({
-        name: details.name,
-        email: details.email,
-        message: details.message,
-      }),
-    });
-    const json = await response.json();
-    console.log(json);
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+        setSuccessful(false);
+        setLoading(false);
+      }
+    );
   };
 
   return (
@@ -83,6 +94,7 @@ export const Contact = () => {
               name="name"
               value={details.name}
               onChange={onChange}
+              required
             />
           </div>
           <div>
@@ -94,6 +106,7 @@ export const Contact = () => {
               value={details.email}
               onChange={onChange}
               className="form-control"
+              required
             />
           </div>
           <div className="form-group">
@@ -105,12 +118,36 @@ export const Contact = () => {
               name="message"
               value={details.message}
               onChange={onChange}
+              required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
+          {loading ? (
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            <button
+              type="submit"
+              className="btn btn-primary mb-3"
+              disabled={loading}
+            >
+              Submit
+            </button>
+          )}
         </form>
+
+        {message && (
+          <div className="form-group">
+            <div
+              className={
+                successful ? "alert alert-success" : "alert alert-danger"
+              }
+              role="alert"
+            >
+              {message}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

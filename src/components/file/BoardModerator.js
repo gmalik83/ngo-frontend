@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MyModalComponent from "./MyModalComponent";
-
+import "./BoardUser.css";
 import UserService from "../services/user.service";
 
 import EventBus from "../../common/EventBus";
@@ -83,7 +83,7 @@ const BoardModerator = () => {
       )}
 
       {content.length ? (
-        <table className="table">
+        <table className="table table1">
           <thead>
             <tr>
               <th scope="col">#</th>

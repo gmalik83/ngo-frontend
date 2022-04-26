@@ -16,12 +16,15 @@ const Profile = () => {
         <>
           {console.log(userData)}
           <h2>Following details are available :</h2>
+          <div className="container">
+          
+          </div>
           <div className="form-group">
             <label htmlFor="Name">Name</label>
             <input
               type="text"
               className="form-control"
-              value={userData.name}
+              value={userData.firstName}
               aria-describedby="Name"
               placeholder="Name"
               readOnly
@@ -64,7 +67,7 @@ const Profile = () => {
             <input
               type="text"
               className="form-control"
-              value={userData.city}
+              value={userData.district}
               aria-describedby="City"
               placeholder="City"
               readOnly
@@ -75,7 +78,7 @@ const Profile = () => {
             <input
               type="text"
               className="form-control"
-              value={userData.address}
+              value={userData.address1}
               aria-describedby="address"
               placeholder="address"
               readOnly

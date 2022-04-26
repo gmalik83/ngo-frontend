@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import './BoardUser.css';
 import UserService from "../services/user.service";
 import EventBus from "../../common/EventBus";
 
@@ -36,7 +36,7 @@ const BoardUser = () => {
       {!content.length && <h1>No data available</h1>}
 
       {content.length ? (
-        <table className="table">
+        <table className="table table1">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -53,11 +53,11 @@ const BoardUser = () => {
               return (
                 <tr key={i}>
                   <td>{i + 1}</td>
-                  <td>{item.name}</td>
+                  <td>{item.firstName}</td>
                   <td>{item.email}</td>
                   <td>{item.country}</td>
                   <td>{item.state}</td>
-                  <td>{item.city}</td>
+                  <td>{item.district}</td>
                   <td>{item.mobile}</td>
                 </tr>
               );

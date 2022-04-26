@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import { Spinner } from "react-bootstrap";
 
-// import Loading from '../Loading'
-
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   // const form = useRef();
@@ -76,6 +74,7 @@ const Login = () => {
               id="email"
               name="email"
               aria-describedby="emailHelp"
+              required
             />
             <div id="emailHelp" className="form-text">
               We'll never share your email with anyone else.
@@ -91,6 +90,7 @@ const Login = () => {
                 onChange={onChange}
                 name="password"
                 id="password"
+                required
               />
             </div>
             {loading ? (

@@ -146,6 +146,9 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
             <>
               <div className="row mb-3">
                 <div className="col">
+                  <span className="badge badge-pill badge-success">
+                    Success
+                  </span>
                   <label htmlFor="FirstName">First Name:</label>
                   <input
                     type="text"
@@ -430,14 +433,14 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
           <Modal.Footer>
             {roleLevel === 1 && (
               <div>
-                <Button
+                {/* <Button
                   variant="primary"
                   className="mr-2 mb-2"
                   value="1"
                   onClick={updateUser}
                 >
                   Make Admin
-                </Button>
+                </Button> */}
                 <Button
                   variant="secondary"
                   className="mr-2 mb-2"
@@ -482,14 +485,14 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
             )}
             {roleLevel === 2 && (
               <div>
-                <Button
+                {/* <Button
                   variant="secondary"
                   className="mr-2 mb-2"
                   value="2"
                   onClick={updateUser}
                 >
                   Make State Coordinator
-                </Button>
+                </Button> */}
                 <Button
                   variant="success"
                   className="mr-2 mb-2"
@@ -526,14 +529,14 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
             )}
             {roleLevel === 3 && (
               <div>
-                <Button
+                {/* <Button
                   variant="success"
                   className="mr-2 mb-2"
                   value="3"
                   onClick={updateUser}
                 >
                   Make District Coordinator
-                </Button>
+                </Button> */}
                 <Button
                   variant="warning"
                   className="mr-2 mb-2"
@@ -562,14 +565,14 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
             )}
             {roleLevel === 4 && (
               <div>
-                <Button
+                {/* <Button
                   variant="warning"
                   className="mr-2 mb-2"
                   value="4"
                   onClick={updateUser}
                 >
                   Make Tehsil Coordinator
-                </Button>
+                </Button> */}
                 <Button
                   variant="info"
                   className="mr-2 mb-2"
@@ -590,14 +593,14 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
             )}
             {roleLevel === 5 && (
               <div>
-                <Button
+                {/* <Button
                   variant="info"
                   className="mr-2 mb-2"
                   value="5"
                   onClick={updateUser}
                 >
                   Make Block Coordinator
-                </Button>
+                </Button> */}
                 <Button
                   variant="danger"
                   className="mr-2 mb-2"

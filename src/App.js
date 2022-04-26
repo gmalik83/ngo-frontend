@@ -1,19 +1,21 @@
-import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
-import { Home } from './components/Home';
-import { Work } from './components/Work';
-import { Member } from './components/Member';
-import { About } from './components/About';
-import { Contact } from './components/Contact';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
-import Footer from './components/Footer';
-import BoardModerator from './components/file/BoardModerator';
-import BoardAdmin from './components/file/BoardAdmin';
-import BoardUser from './components/file/BoardUser';
-import Profile from './components/Profile';
+import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { Home } from "./components/Home";
+import { Work } from "./components/Work";
+import { Member } from "./components/Member";
+import { About } from "./components/About";
+import { Contact } from "./components/Contact";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Footer from "./components/Footer";
+import BoardModerator from "./components/file/BoardModerator";
+import BoardAdmin from "./components/file/BoardAdmin";
+import BoardUser from "./components/file/BoardUser";
+import Profile from "./components/Profile";
+import New from "./components/New";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/admin" exact element={<BoardAdmin />} />
           <Route path="/user" exact element={<BoardUser />} />
           <Route path="/profile" exact element={<Profile />} />
+          <Route path="/page/:id" exact element={<New />} />
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <Footer />
       </Router>

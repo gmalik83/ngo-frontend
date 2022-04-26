@@ -186,8 +186,6 @@ const Register = () => {
       credentials.address1
     ).then(
       (response) => {
-        // navigate('/profile');
-        // window.location.reload();
         setMessage(response.message);
         setSuccessful(true);
         setLoading(false);
@@ -215,6 +213,7 @@ const Register = () => {
             <>
               <div className="row mb-3">
                 <div className="col">
+                  <label htmlFor="FirstName">First Name(पूरा नाम):</label>
                   <input
                     type="text"
                     id="firstname"
@@ -223,9 +222,11 @@ const Register = () => {
                     placeholder="First name"
                     value={credentials.firstname}
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="col">
+                  <label htmlFor="LastName">Last Name(पूरा नाम):</label>
                   <input
                     type="text"
                     className="form-control"
@@ -234,6 +235,7 @@ const Register = () => {
                     id="lastname"
                     value={credentials.lastname}
                     onChange={onChange}
+                    required
                   />
                 </div>
               </div>
@@ -249,10 +251,12 @@ const Register = () => {
                   value={credentials.age}
                   onChange={onChange}
                   aria-describedby="age"
+                  required
                 />
               </div>
               <div className="row mb-3">
                 <div className="col">
+                  <label htmlFor="father">Father's Name (पिता का नाम):</label>
                   <input
                     type="text"
                     className="form-control"
@@ -261,9 +265,11 @@ const Register = () => {
                     name="father"
                     value={credentials.father}
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="col">
+                  <label htmlFor="mother">Mother's Name (माता का नाम):</label>
                   <input
                     type="text"
                     className="form-control"
@@ -272,14 +278,15 @@ const Register = () => {
                     name="mother"
                     value={credentials.mother}
                     onChange={onChange}
+                    required
                   />
                 </div>
               </div>
               <hr></hr>
-              <h4 className="text-center">Native Address:</h4>
+              <h4 className="text-center">Native Address (मूल पता):</h4>
               <div className="mb-3 mt-3">
                 <label htmlFor="Address" className="form-label">
-                  Village/Area/House No.:
+                  Village/Area/House No.(गांव/क्षेत्र/मकान नं):
                 </label>
                 <input
                   type="text"
@@ -289,11 +296,12 @@ const Register = () => {
                   value={credentials.hno}
                   onChange={onChange}
                   aria-describedby="HouseNumber"
+                  required
                 />
               </div>
               <div>
                 <label htmlFor="Post Office" className="form-label">
-                  Post Office:
+                  Post Office (डाक-घर):
                 </label>
                 <input
                   type="text"
@@ -303,10 +311,11 @@ const Register = () => {
                   value={credentials.postoffice}
                   onChange={onChange}
                   aria-describedby="PostOffice"
+                  required
                 />
               </div>
               <label htmlFor="block" className="form-label">
-                Block:
+                Block (खंड):
               </label>
               <input
                 type="text"
@@ -316,9 +325,10 @@ const Register = () => {
                 value={credentials.block}
                 onChange={onChange}
                 aria-describedby="Block"
+                required
               />
               <label htmlFor="tehsil" className="form-label">
-                Tehsil:
+                Tehsil (तहसील):
               </label>
               <input
                 type="text"
@@ -328,8 +338,9 @@ const Register = () => {
                 value={credentials.tehsil}
                 onChange={onChange}
                 aria-describedby="Tehsil"
+                required
               />
-              <label htmlFor="Country">Country:</label>
+              <label htmlFor="Country">Country (देश):</label>
               <select
                 className="form-select"
                 name="country"
@@ -343,7 +354,7 @@ const Register = () => {
                   </option>
                 ))}
               </select>
-              <label htmlFor="State">State:</label>
+              <label htmlFor="State">State (राज्य):</label>
               <select
                 className="form-select"
                 name="state"
@@ -358,7 +369,7 @@ const Register = () => {
                 ))}
               </select>
               <div className="mb-3">
-                <label htmlFor="City">District:</label>
+                <label htmlFor="City">District ( जिला ):</label>
                 <select
                   className="form-select "
                   name="district"
@@ -375,7 +386,7 @@ const Register = () => {
               </div>
               <div className="mb-3">
                 <label htmlFor="Pincode" className="form-label">
-                  Pincode
+                  Pincode (पिन कोड):
                 </label>
                 <input
                   type="text"
@@ -385,16 +396,19 @@ const Register = () => {
                   value={credentials.pincode}
                   onChange={onChange}
                   aria-describedby="pincodeHelp"
+                  required
                 />
               </div>
               <hr></hr>
               <h4 className="text-center">
-                Educational and Professional Details
+                Educational and Professional Details (शैक्षिक और व्यावसायिक
+                विवरण):
               </h4>
               <hr></hr>
 
               <label htmlFor="Area of Specialization and Achievement(if any)">
-                Area of Specialization and Achievement (if any):
+                Area of Specialization and Achievement (if any) (विशेषज्ञता और
+                उपलब्धि का क्षेत्र (यदि कोई हो) ):
               </label>
               <input
                 type="text"
@@ -405,7 +419,9 @@ const Register = () => {
                 onChange={onChange}
               />
               <div className="mt-2">
-                <label htmlFor="Graduation:">Graduation in:</label>
+                <label htmlFor="Graduation:">
+                  Graduation in (स्नातक विषय):
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -416,7 +432,7 @@ const Register = () => {
                 />
               </div>
               <div className="mt-2">
-                <label htmlFor="12th in:">12th in:</label>
+                <label htmlFor="12th in:">12th in (12वीं):</label>
                 <input
                   type="text"
                   className="form-control"
@@ -428,7 +444,8 @@ const Register = () => {
               </div>
               <div className="mt-2">
                 <label htmlFor="Any Special Skill:">
-                  Any special education/skill/certificate:
+                  Any special education/skill/certificate (कोई विशेष
+                  शिक्षा/कौशल/प्रमाण पत्र:):
                 </label>
                 <input
                   type="text"
@@ -442,7 +459,8 @@ const Register = () => {
               <div className="mt-2">
                 <label htmlFor="service">
                   If in Government Job/Private Job/Professional (Write the
-                  details. i.e. department, post etc.):
+                  details. i.e. department, post etc.) यदि सरकारी नौकरी/निजी
+                  नौकरी/पेशेवर में (विवरण लिखें। अर्थात विभाग, पद आदि): :
                 </label>
                 <input
                   type="text"
@@ -454,11 +472,13 @@ const Register = () => {
                 />
               </div>
               <hr></hr>
-              <h4 className="text-center">Contact Details:</h4>
+              <h4 className="text-center">
+                Contact Details (सम्पर्क करने का विवरण:):
+              </h4>
               <hr></hr>
               <div className="mb-3">
                 <label htmlFor="mobile" className="form-label">
-                  Mobile Number
+                  Mobile Number (फ़ोन नंबर)
                 </label>
                 <input
                   type="text"
@@ -468,11 +488,12 @@ const Register = () => {
                   value={credentials.mobile}
                   onChange={onChange}
                   aria-describedby="mobile"
+                  required
                 />
               </div>
 
               <div>
-                <label htmlFor="Email">Email:</label>
+                <label htmlFor="Email">Email Address (ई-मेल एड्रेस):</label>
                 <input
                   type="email"
                   id="email"
@@ -480,9 +501,13 @@ const Register = () => {
                   value={credentials.email}
                   onChange={onChange}
                   className="form-control"
+                  required
                 />
               </div>
-              <label htmlFor="Password">Set Password for Later Use:</label>
+              <label htmlFor="Password">
+                Set Password for Later Use (बाद में उपयोग के लिए पासवर्ड सेट
+                करें:):
+              </label>
               <input
                 type="password"
                 id="password"
@@ -490,10 +515,11 @@ const Register = () => {
                 value={credentials.password}
                 onChange={onChange}
                 className="form-control"
+                required
               />
               <div className="mb-3 mt-3">
                 <label htmlFor="Correspondence Address" className="form-label">
-                  Correspondence Address
+                  Correspondence Address (पत्राचार का पता)
                 </label>
                 <input
                   type="text"
@@ -503,6 +529,7 @@ const Register = () => {
                   value={credentials.address1}
                   onChange={onChange}
                   aria-describedby="addressHelp"
+                  required
                 />
               </div>
 
@@ -510,7 +537,12 @@ const Register = () => {
                 I hereby declare that I have gone through the basic code of
                 conduct of the society and my activities will be as per
                 organization's code of conduct and Indian constitutional
-                provision. 
+                provision.
+                <br /> <br />
+                मैं एतद्द्वारा घोषणा करता हूं कि मैंने समाज की मूल आचार संहिता
+                का पालन किया है और मेरी गतिविधियां संगठन की आचार संहिता और
+                भारतीय संवैधानिक प्रावधान के अनुसार होंगी।
+                <br />
               </h5>
 
               {loading ? (
