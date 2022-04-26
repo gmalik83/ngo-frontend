@@ -22,6 +22,12 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   // Message after approve
   const [message1, setMessage1] = useState("");
   const [roleLevel, setRoleLevel] = useState(0);
+  // State for Successful Role Change
+  const [roleUpdate, setRoleUpdate] = useState(false);
+  // New Role Level updated
+  const [roleMessage, setRoleMessage] = useState("");
+  // Error Message
+  const [roleFailed, setRoleFailed] = useState("");
 
   // Get Current Logged in User
 
@@ -29,13 +35,16 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   const [approve, setApprove] = useState(false);
 
   const closeModal = () => {
+    console.log("I am executing");
     setModalState(false);
     handleModalToggle();
   };
   const secondModal = () => {
     setApprove(false);
   };
-
+  const thirdModal = () => {
+    setRoleUpdate(false);
+  };
   // Function to get data for Particular User
   const getData = async (id) => {
     // setLoading(true);
@@ -92,12 +101,15 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
     setModalState(false);
     setApprove(true);
     axios
-      .post(url + `/api/deleteUser/?id=${userData._id}`, {
-        headers: authHeader(),
-      })
+      .post(
+        url + `/api/deleteUser/?id=${userData._id}`,
+        {},
+        {
+          headers: authHeader(),
+        }
+      )
       .then((res) => setMessage1(res.data.message))
       .catch((error) => {
-        console.log(error);
         const resMessage =
           (error.response &&
             error.response.data &&
@@ -110,6 +122,8 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
   };
 
   const updateUser = (e) => {
+    setModalState(false);
+    setRoleUpdate(true);
     const value = e.target.value;
     const _id = id;
     axios
@@ -123,8 +137,17 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
           headers: authHeader(),
         }
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => setRoleMessage(res.data.message))
+      .catch((error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setRoleFailed(resMessage);
+      });
   };
   // Call GET for user on Rendering Modal Component and set UserData state
 
@@ -186,6 +209,15 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
                   aria-describedby="age"
                   readOnly
                 />
+                <div className="form-group">
+                  <label htmlFor="Role">Current Role:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={userData.role}
+                    readOnly
+                  />
+                </div>
               </div>
               <div className="row mb-3">
                 <div className="col">
@@ -661,6 +693,29 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
           <Modal.Body>Result : {message1}</Modal.Body>
           <Modal.Footer>
             <Button variant="warning" onClick={() => setApprove(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+      {roleUpdate && (
+        <Modal show={roleUpdate} centered onHide={thirdModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Status of Role Update:</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {roleFailed ? (<div className="form-group">
+              <h3>Response From Server:</h3>
+              <div className="alert alert-danger" role="alert">
+                {roleFailed}
+              </div>
+            </div>):(<>
+            <h3>Result :{roleMessage}</h3>
+            </>)}
+            </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="warning" onClick={() => setRoleUpdate(false)}>
               Close
             </Button>
           </Modal.Footer>

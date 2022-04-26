@@ -69,9 +69,7 @@ const BoardModerator = () => {
       <h3 className="mt-3 mb-3">All Volunteer Details:</h3>
       {/*If Content array is NULL*/}
       {!content.length && (
-        <h1 className="text-center mt-4 mb-4">
-          No Requests available
-        </h1>
+        <h1 className="text-center mt-4 mb-4">No Requests available</h1>
       )}
 
       {modalState && dataId && (
@@ -93,6 +91,7 @@ const BoardModerator = () => {
               <th scope="col">State</th>
               <th scope="col">District</th>
               <th scope="col">Mobile</th>
+              <th scope="col">Current Role</th>
               <th scope="col">Profile</th>
             </tr>
           </thead>
@@ -107,6 +106,7 @@ const BoardModerator = () => {
                   <td>{item.state}</td>
                   <td>{item.district}</td>
                   <td>{item.mobile}</td>
+                  <td>{item.role}</td>
                   <td>
                     <button
                       className="btn btn-warning shadow"
