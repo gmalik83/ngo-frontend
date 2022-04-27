@@ -29,6 +29,7 @@ const Slider = () => {
     <div className="row">
       <div className="col-md-8">
         <div
+          style ={{margin:"25px 25px"}}
           id="demo"
           className="carousel slide"
           data-ride="carousel"
@@ -61,7 +62,7 @@ const Slider = () => {
                     src="https://images.unsplash.com/photo-1617450365226-9bf28c04e130?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmdvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                     alt="Default Image"
                     height="320"
-                    width="1100"
+                    width="900"
                   />
                 </div>
               </>
@@ -76,7 +77,7 @@ const Slider = () => {
                             src={item.src}
                             alt={item.alt}
                             height="320"
-                            width="1100"
+                            width="900"
                           />
                         </div>
                       ) : (
@@ -85,7 +86,7 @@ const Slider = () => {
                             src={item.src}
                             alt={item.alt}
                             height="320"
-                            width="1100"
+                            width="900"
                           />
                         </div>
                       )}
@@ -105,7 +106,11 @@ const Slider = () => {
         </div>
       </div>
       {message && console.log(message)}
-      <Announcement />
+      <div className="col-md-4">
+        <div className="m-4">
+        <Announcement />
+      </div>
+      </div> 
     </div>
   );
 };

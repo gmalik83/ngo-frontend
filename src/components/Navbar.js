@@ -64,7 +64,7 @@ export const Navbar = () => {
       {/* Navbar Starts */}
       <>
         <nav className="navbar navbar-expand-lg navbar-dark custom-class1">
-          <div className="container-fluid">
+          {/* <div className="container-fluid"> */}
             {/* Button Toggle for Smaller Screens */}
             <button
               className="navbar-toggler"
@@ -511,7 +511,7 @@ export const Navbar = () => {
                 )}
               </ul>
             </div>
-          </div>
+          {/* </div> */}
         </nav>
       </>
     </div>

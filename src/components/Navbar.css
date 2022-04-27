@@ -13,6 +13,9 @@
     right: 100%;
     left: auto;
   }
+  .navbar-nav > a:hover {
+    display: block !important;
+  }
   .dropdown-menu > li:hover {
     background-color: #f1f1f1;
   }
@@ -31,4 +34,11 @@
     margin-bottom: 0.5rem;
   }
 }
+  /* @media all and (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu{ display: none; }
+    .navbar .nav-item:hover .nav-link{   }
+    .navbar .nav-item:hover .dropdown-menu{ display: block; }
+    .navbar .nav-item .dropdown-menu{ margin-top:0; }
+  } */
+
 /* ============ small devices .end// ============ */

@@ -42,7 +42,7 @@
 }
 .carousel-item > img {
   height: 380px !important;
-  max-width: 100% !important;
+  max-width: 100%;
 }
 .latest-box {
   background: #f1f1f1;

@@ -31,8 +31,8 @@ const Announcement = () => {
     );
   }, []);
   return (
-    <div className="col-md-4">
-      <div className="panel panel-primary">
+    <div>
+      <div className="panel panel-primary" style ={{margin:"25x 10px 25px 5px"}}>
         <div className="panel-heading panel-heading-1 panel2">Announcement</div>
 
         <div className="panel-body panel1">
