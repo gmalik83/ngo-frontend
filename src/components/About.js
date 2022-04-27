@@ -27,6 +27,10 @@ export const About = () => {
             and scrambled it to make a type specimen book. It has survived not
             only five centuries, but also the leap into electronic typesetting,
             remaining essentially unchanged.
+            <ul>
+              <li>This is first Item</li>
+              <li>This is Second Item</li>
+            </ul>
           </p>
         </div>
       </section>

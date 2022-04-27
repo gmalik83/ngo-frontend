@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 import img1 from "../images/NITKKR_logo.png";
 
 import AuthService from "./services/auth.service";
-
 
 export const Navbar = () => {
   // Initial State for ModeratorBoard
@@ -64,26 +64,24 @@ export const Navbar = () => {
       {/* Navbar Starts */}
       <>
         <nav className="navbar navbar-expand-lg navbar-dark custom-class1">
-          <div>
-            {/* <Link className="navbar-brand" to="/">
-            Siksha
-          </Link> */}
+          <div className="container-fluid">
+            {/* Button Toggle for Smaller Screens */}
             <button
               className="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
+              data-bs-target="#main_nav"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
+              {/* Toggler Icon for Smaller Screens */}
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
+            {/* Navbar Starting  */}
+            <div className="collapse navbar-collapse" id="main_nav">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0 custom-class1">
+                {/* First Item in Navbar  */}
                 <li className="nav-item px-4">
                   <Link
                     className="nav-link custom-class2"
@@ -93,9 +91,10 @@ export const Navbar = () => {
                     Home
                   </Link>
                 </li>
-                <li className="nav-item dropdown px-4 dropbtn">
+               
+                <li className="nav-item dropdown px-4 dropbtn" id="myDropdown">
                   <Link
-                    className="nav-link dropdown-toggle "
+                    className="nav-link dropdown-toggle"
                     to="/"
                     id="navbarDropdown"
                     role="button"
@@ -104,13 +103,80 @@ export const Navbar = () => {
                   >
                     About Organization
                   </Link>
+                  {/* Nested DropDown */}
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
                       <Link className="dropdown-item" to="/about">
-                        About Us
+                        About POG
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link className="dropdown-item" to="/about">
+                        Mission and Vision
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/">
+                        Administrative Structure &raquo;
+                      </Link>
+                      {/* Nested Dropdown for Particular Item */}
+                      <ul className="submenu dropdown-menu">
+                        <li>
+                          <Link className="dropdown-item" to="/about">
+                            Submenu item 1
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="dropdown-item" to="/about">
+                            Submenu item 2
+                          </Link>
+                        </li>
+                        <li className="dropbtn">
+                          <Link className="dropdown-item" to="/about">
+                            Submenu item 3 &raquo;
+                          </Link>
+                          <ul className="submenu dropdown-menu">
+                            <li>
+                              <Link className="dropdown-item" to="/about">
+                                Multi level 1
+                              </Link>
+                            </li>
+                            <li>
+                              <Link className="dropdown-item" to="/about">
+                                Multi level 2
+                              </Link>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <Link className="dropdown-item" to="/about">
+                            Submenu item 4
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="dropdown-item" to="/about">
+                            Submenu item 5
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/about">
+                        Core's Message
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/about">
+                        Our History
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/about">
+                        Partnership
                       </Link>
                     </li>
                     <li>
@@ -177,7 +243,7 @@ export const Navbar = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Institution CSR
+                    CSR Institution
                   </Link>
                   <ul
                     className="dropdown-menu"
@@ -258,6 +324,7 @@ export const Navbar = () => {
                         Government Sector
                       </Link>
                     </li>
+
                     <li>
                       <Link className="dropdown-item" to="/page/15">
                         Private Sector
@@ -287,7 +354,7 @@ export const Navbar = () => {
                   >
                     <li>
                       <Link className="dropdown-item" to="/page/17">
-                        Basketball
+                        About Sports
                       </Link>
                     </li>
                     <li>
@@ -320,6 +387,32 @@ export const Navbar = () => {
                     <li>
                       <Link className="dropdown-item" to="/page/20">
                         Employment
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/page/24">
+                        Visit
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+                <li className="nav-item dropdown px-4 dropbtn" id="myDropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    to="/"
+                    data-bs-toggle="dropdown"
+                  >
+                    Resources
+                  </Link>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link className="dropdown-item" to="/about">
+                        Success Stories
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/about">
+                        Photo Galleries
                       </Link>
                     </li>
                   </ul>
@@ -385,11 +478,7 @@ export const Navbar = () => {
                       </Link>
                     </li>
                     <li className="nav-item px-4">
-                      <Link
-                        to="/"
-                        className="nav-link px-4"
-                        onClick={logOut}
-                      >
+                      <Link to="/" className="nav-link px-4" onClick={logOut}>
                         Log Out
                       </Link>
                     </li>
