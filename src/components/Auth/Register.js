@@ -213,7 +213,7 @@ const Register = () => {
             <>
               <div className="row mb-3">
                 <div className="col">
-                  <label htmlFor="FirstName">First Name(पूरा नाम):</label>
+                  <label htmlFor="FirstName">First Name(प्रथम नाम):</label>
                   <input
                     type="text"
                     id="firstname"
@@ -226,7 +226,7 @@ const Register = () => {
                   />
                 </div>
                 <div className="col">
-                  <label htmlFor="LastName">Last Name(पूरा नाम):</label>
+                  <label htmlFor="LastName">Last Name(अंतिम नाम):</label>
                   <input
                     type="text"
                     className="form-control"
