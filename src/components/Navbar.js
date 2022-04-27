@@ -91,7 +91,7 @@ export const Navbar = () => {
                     Home
                   </Link>
                 </li>
-               
+
                 <li className="nav-item dropdown px-4 dropbtn" id="myDropdown">
                   <Link
                     className="nav-link dropdown-toggle"
@@ -203,32 +203,27 @@ export const Navbar = () => {
                   >
                     <li>
                       <Link className="dropdown-item" to="/page/1">
-                        Primary
+                        Foundational
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/page/2">
-                        Secondary
+                        Preparatory
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/page/3">
-                        Higher
+                        Middle
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/page/4">
-                        IIT JEE
+                        Secondary
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/page/5">
-                        NEET
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/page/6">
-                        SSC Exams
+                        Competitve Exams
                       </Link>
                     </li>
                   </ul>
