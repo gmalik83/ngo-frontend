@@ -4,7 +4,7 @@ import Service1 from './images/image1.jpg';
 export const Work = () => {
   return (
     <div>
-      <section className="py-4 bg-info">
+      <section className="py-4 bg-info"> 
         <div className="container">
           <div className="row">
             <div className="col-md-4 my-auto">
