@@ -3,21 +3,26 @@ import AuthService from "./services/auth.service";
 import { Spinner } from "react-bootstrap";
 
 export const Contact = () => {
+  // Message for Displaying Error or Success
   const [message, setMessage] = useState("");
+  // For Hide Form if Successfull is True
   const [successful, setSuccessful] = useState(false);
+  // Loading Spinner
   const [loading, setLoading] = useState(false);
+  // Form Details
   const [details, setDetails] = useState({
     name: "",
     email: "",
     message: "",
   });
+  // OnChange Handler for Inputs
   const onChange = (e) => {
     setDetails({
       ...details,
       [e.target.name]: e.target.value,
     });
   };
-
+  // Form Submit Handler
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
