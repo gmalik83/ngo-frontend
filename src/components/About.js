@@ -16,6 +16,7 @@ export const About = () => {
           </div>
         </div>
       </section>
+      {/* This is Static Content */}
       <section className="section bg-c-light border-bottom">
         <div className="container">
           <h5 className="main-heading">Our Organization</h5>
@@ -34,6 +35,7 @@ export const About = () => {
           </p>
         </div>
       </section>
+      {/* This is Dynamic Content  */}
       <Values />
     </div>
   );
