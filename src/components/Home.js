@@ -6,12 +6,11 @@ import Values from "./Values";
 import Services from "./Services";
 
 export const Home = () => {
-  // UseEffect for Articles
+  
   return (
     <div>
       <Slider />
-      {/* <Articles /> */}
-      <section className="section">
+      <section className="section"> 
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
