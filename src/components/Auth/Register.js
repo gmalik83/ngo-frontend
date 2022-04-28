@@ -14,7 +14,7 @@ const Register = () => {
     postoffice: "",
     block: "",
     tehsil: "",
-    country: "",
+    country: "India",
     state: "",
     district: "",
     pincode: "",
@@ -66,11 +66,50 @@ const Register = () => {
 
   // For Country List in Select Country Option : Render automatically
 
+  // useEffect(() => {
+  //   const getCountry = async () => {
+  //     const token = await getToken();
+  //     const countries = await fetch(
+  //       "https://www.universal-tutorial.com/api/countries/",
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           Accept: "application/json",
+  //         },
+  //       }
+  //     );
+  //     const resCountries = await countries.json();
+  //     setCountry(resCountries);
+  //   };
+  //   getCountry();
+  // }, []);
+
+  // Save the selected Country for Registering
+
+  // const handleCountry = (e) => {
+  //   const getCountryName = e.target.value;
+  //   setCountryName(getCountryName);
+  //   setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  // };
+  // Save the selected State
+  const handleState = (e) => {
+    // const getStateName = e.target.value;
+    // setstatName(getStateName);
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+  // Save the selected city
+  // const handleCity = (e) => {
+  //   setCityName(e.target.value);
+  //   setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  // };
+
+  // Re render when Country Selection is changed
   useEffect(() => {
-    const getCountry = async () => {
+    const getState = async () => {
       const token = await getToken();
-      const countries = await fetch(
-        "https://www.universal-tutorial.com/api/countries/",
+      const resState = await fetch(
+        `https://www.universal-tutorial.com/api/states/India`,
         {
           method: "GET",
           headers: {
@@ -79,77 +118,35 @@ const Register = () => {
           },
         }
       );
-      const resCountries = await countries.json();
-      setCountry(resCountries);
+      const resSt = await resState.json();
+      setStat(resSt);
     };
-    getCountry();
+    getState();
   }, []);
-
-  // Save the selected Country for Registering
-
-  const handleCountry = (e) => {
-    const getCountryName = e.target.value;
-    setCountryName(getCountryName);
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-  // Save the selected State
-  const handleState = (e) => {
-    const getStateName = e.target.value;
-    setstatName(getStateName);
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-  // Save the selected city
-  const handleCity = (e) => {
-    setCityName(e.target.value);
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
-  // Re render when Country Selection is changed
-  useEffect(() => {
-    if (initialStateRender.current) initialStateRender.current = false;
-    else {
-      const token = localStorage.getItem("token");
-      const getState = async () => {
-        const resState = await fetch(
-          `https://www.universal-tutorial.com/api/states/${countryName}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: "application/json",
-            },
-          }
-        );
-        const resSt = await resState.json();
-        setStat(resSt);
-      };
-      getState();
-    }
-  }, [countryName]);
 
   // Re render when State Name CHange
 
-  useEffect(() => {
-    if (initialCityRender.current) initialCityRender.current = false;
-    else {
-      const token = localStorage.getItem("token");
-      const getCity = async () => {
-        const resCity = await fetch(
-          `https://www.universal-tutorial.com/api/cities/${statName}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: "application/json",
-            },
-          }
-        );
-        const resC = await resCity.json();
-        setCity(resC);
-      };
-      getCity();
-    }
-  }, [statName]);
+  // useEffect(() => {
+  //   if (initialCityRender.current) initialCityRender.current = false;
+  //   else {
+  //     const token = localStorage.getItem("token");
+  //     const getCity = async () => {
+  //       const resCity = await fetch(
+  //         `https://www.universal-tutorial.com/api/cities/${statName}`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //             Accept: "application/json",
+  //           },
+  //         }
+  //       );
+  //       const resC = await resCity.json();
+  //       setCity(resC);
+  //     };
+  //     getCity();
+  //   }
+  // }, [statName]);
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -340,48 +337,45 @@ const Register = () => {
                 aria-describedby="Tehsil"
                 required
               />
-              <label htmlFor="Country">Country (देश):</label>
-              <select
-                className="form-select"
-                name="country"
-                value={credentials.country}
-                onChange={(e) => handleCountry(e)}
-              >
-                <option value="">Select Country</option>
-                {country.map((getCon, index) => (
-                  <option key={index} value={getCon.country_name}>
-                    {getCon.country_name}
-                  </option>
-                ))}
-              </select>
-              <label htmlFor="State">State (राज्य):</label>
-              <select
-                className="form-select"
-                name="state"
-                value={credentials.state}
-                onChange={(e) => handleState(e)}
-              >
-                <option value="">Select State</option>
-                {stat.map((val, index) => (
-                  <option key={index} value={val.state_name}>
-                    {val.state_name}
-                  </option>
-                ))}
-              </select>
               <div className="mb-3">
                 <label htmlFor="City">District ( जिला ):</label>
-                <select
-                  className="form-select "
+                <input
+                  type="text"
+                  className="form-control"
                   name="district"
+                  id="district"
                   value={credentials.district}
-                  onChange={(e) => handleCity(e)}
+                  onChange={onChange}
+                  aria-describedby="District"
+                  required
+                />
+              </div>
+              <div className="m-1">
+                <label htmlFor="State">State (राज्य):</label>
+                <select
+                  className="form-select"
+                  name="state"
+                  value={credentials.state}
+                  onChange={(e) => handleState(e)}
                 >
-                  <option value="">Select District</option>
-                  {city.map((val, index) => (
-                    <option key={index} val={val.city_name}>
-                      {val.city_name}
+                  <option value="">Select State</option>
+                  {stat.map((val, index) => (
+                    <option key={index} value={val.state_name}>
+                      {val.state_name}
                     </option>
                   ))}
+                </select>
+              </div>
+              <div className="m-1">
+                <label htmlFor="Country">Country(देश):</label>
+                <select
+                  className="form-select"
+                  name="country"
+                  id="country"
+                  value={credentials.country}
+                  onChange={onChange}
+                >
+                  <option value="India">India</option>
                 </select>
               </div>
               <div className="mb-3">
