@@ -13,7 +13,7 @@ const Footer = () => {
           <Link to="/" className="me-4 text-reset">
             <i className="fa fa-facebook-f"></i>
           </Link>
-          <Link to="/" className="me-4 text-reset">
+          <Link to="/" className="me-4 text-reset"> 
             <i className="fa fa-twitter"></i>
           </Link>
           <Link to="/" className="me-4 text-reset">
