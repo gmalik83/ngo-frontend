@@ -115,7 +115,7 @@ const Slider = () => {
       {message && console.log(message)}
       <div className="col-md-4">
         <div className="m-4">
-          <Announcement />
+          <Announcement /> 
         </div>
       </div>
     </div>
