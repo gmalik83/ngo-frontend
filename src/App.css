@@ -208,7 +208,7 @@ body {
   padding-bottom: 40px;
 }
 .main-heading {
-  color: rgb(204, 18, 18);
+  color: rgb(182, 18, 204);
   font-size: 26px;
 }
 .underline {
@@ -241,7 +241,7 @@ p {
 .custom-class1 {
   display: flex !important;
   flex-wrap: wrap !important;
-  background-color: #1285c6;
+  background-color: black;
   color: white !important;
   height: auto;
 }

@@ -16,6 +16,7 @@ import BoardUser from "./components/file/BoardUser";
 import Profile from "./components/Profile";
 import New from "./components/New";
 import NotFound from "./components/NotFound";
+import  {VisionAndMission}  from "./components/VisionAndMission";
  
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/admin" exact element={<BoardAdmin />} />
           <Route path="/user" exact element={<BoardUser />} />
           <Route path="/profile" exact element={<Profile />} />
+          <Route path="/vision-mission" exact element={<VisionAndMission/>}/>
           <Route path="/page/:Id" element={<New/>} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>

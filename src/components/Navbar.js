@@ -128,8 +128,18 @@ export const Navbar = () => {
                       </li>
 
                       <li>
-                        <Link className="dropdown-item" to="/about">
+                        <Link className="dropdown-item" to="/vision-mission">
                           Mission and Vision
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/about">
+                          Event Calendar
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/about">
+                          Previous Events
                         </Link>
                       </li>
                       <li>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Values from "./Values";
 
-export const About = () => {
+export const VisionAndMission = () => {
   return (
     <div>
       <section className="py-4 bg-info">
@@ -11,7 +11,7 @@ export const About = () => {
               <h4>About Us</h4>
             </div>
             <div className="col-md-8 my-auto">
-              <h6 className="float-end">Home / About Us</h6>
+              <h6 className="float-end">Home / Vision & Mission</h6>
             </div>
           </div>
         </div>
@@ -19,7 +19,7 @@ export const About = () => {
       {/* This is Static Content */}
       <section className="section bg-c-light border-bottom">
         <div className="container text-justify">
-          <h5 className="main-heading">PoG</h5>
+          <h5 className="main-heading">Vision</h5>
           <hr></hr>
           {/* <div className="underline"></div> */}
           <p> 
@@ -33,6 +33,9 @@ export const About = () => {
             Parivartan works intensively with women on its belief in the
             philosophy that sustainable development remains incomplete without
             dynamic participation of the women. </p>
+
+            <h5 className="main-heading">Mission</h5>
+          <hr></hr>
             <p> Deliberations for voicing
             industrial project affected community, struggle for establishment of
             their fundamental rights and strengthened cohesive federations for

@@ -41,7 +41,7 @@ const Values = () => {
           {/* If Problem in Fetching data , then Display Default Data */}
           {content.length === 0 ? (
             <>
-              <div className="col-md-4 text-center">
+              <div className="col-md-4 text-left">
                 <h6>Our Vision</h6>
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and
@@ -77,7 +77,7 @@ const Values = () => {
             {/* Display FETCHED data from Backend */}
               {content.map((item, i) => {
                 return (
-                  <div className="col-md-4 text-center">
+                  <div className="col-md-4 text-left text-justify">
                     <h6>{item.title}{item.check}</h6>
                     <p>{item.data}</p>
                   </div>
