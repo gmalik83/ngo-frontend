@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import UserService from "./services/user.service";
 
 const Services = () => {
+  // Array for Services Item 
   const [content, setContent] = useState([]);
   const [message, setMessage] = useState("");
   useEffect(() => {
+    // GET services data from Backend in form of array
     UserService.getServices().then(
       (response) => {
         if (response.status === 200) {
@@ -34,6 +36,7 @@ const Services = () => {
             <h3 className="main-heading">Our Work</h3>
             <div className="underline mx-auto"></div>
           </div>
+          {/* If there is any problem in fetching data , then display default Static Data  */}
           {content.length === 0 ? (
             <>
               <div className="col-md-4">
@@ -106,6 +109,7 @@ const Services = () => {
             </>
           ) : (
             <>
+            {/* Services from Backend */}
               {content.map((item, i) => {
                 return (
                   <div className="col-md-4">
