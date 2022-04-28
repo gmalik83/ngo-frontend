@@ -3,6 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:5000/api/auth/";
 const API_URL1 = "http://localhost:5000/";
 
+// For New Registration
 const register = (
   firstname,
   lastname,
@@ -58,6 +59,7 @@ const register = (
     });
 };
 
+// For Login of Registered and Approved Users
 const login = (email, password) => {
   return axios
     .post(API_URL + "login", {
@@ -65,6 +67,7 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
+      // If Server Responded with USER Object , then store it in Local Storage
       if (response.data.firstName) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
@@ -72,29 +75,37 @@ const login = (email, password) => {
       return response.data;
     });
 };
-const contact = (name,email,message) =>{
-  return axios.post(API_URL1+"contact",{
-    name,email,message
-  }).then((response)=>{
-    return response.data;
-  })
-}
 
-const logout = () => {
-  localStorage.removeItem("user");
- 
+// For Contact form in ContactUs Page
+const contact = (name, email, message) => {
+  return axios
+    .post(API_URL1 + "contact", {
+      name,
+      email,
+      message,
+    })
+    .then((response) => {
+      return response.data;
+    });
 };
 
+// For Logout User => Remove User from LocalStorage
+const logout = () => {
+  localStorage.removeItem("user");
+};
+
+// For GET current User from Local Storage
 const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+// Exporting All Functions
 const AuthService = {
   register,
   login,
   logout,
   getCurrentUser,
-  contact
+  contact,
 };
 
 export default AuthService;
