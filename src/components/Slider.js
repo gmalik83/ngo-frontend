@@ -3,11 +3,16 @@ import Announcement from "./Announcement";
 import UserService from "./services/user.service";
 
 const Slider = () => {
+  // Content Array for Image Data from Database
   const [content, setContent] = useState([]);
+  // Message for Any Error
   const [message, setMessage] = useState("");
+  // Call When Component Loads
   useEffect(() => {
+    // API Request to Get Images from Backend
     UserService.getImages().then(
       (response) => {
+        // If all good
         if (response.status === 200) {
           setContent(response.data);
         }
@@ -20,7 +25,7 @@ const Slider = () => {
             error.response.data.message) ||
           error.message ||
           error.toString();
-
+        // It Contains Errors , if any , occured
         setMessage(resMessage);
       }
     );
@@ -36,7 +41,7 @@ const Slider = () => {
           data-ride="carousel"
           data-interval="2000"
         >
-          {/* If No Image from database , then Show a Default Image */}
+          {/* If No Image from database , then Show a Default Image (Important for Slider to Work) */}
           <ul className="carousel-indicators">
             {content.length === 0 ? (
               <li data-target="#demo" data-slide-to="0" className="active"></li>
@@ -50,7 +55,7 @@ const Slider = () => {
               </>
             )}
           </ul>
-
+         {/* Default Image in Case of Content Array Length 0 (Error or no data from backend) */}
           <div className="carousel-inner">
             {content.length === 0 ? (
               <div className="carousel-item active">
@@ -112,6 +117,7 @@ const Slider = () => {
           </a>
         </div>
       </div>
+    {/* If Message is not Empty , Log it on Console */}
       {message && console.log(message)}
       <div className="col-md-4">
         <div className="m-4">
