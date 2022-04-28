@@ -27,7 +27,7 @@ export const Work = () => {
             with different sectors to enable benefit for more and more people by
             providing the the chance . Our member also take pride in helping
             anyone out in need. Our Organization has helped more than 10,000
-            deserving ones.
+            deserving ones. 
           </p>
         </div>
       </section>
