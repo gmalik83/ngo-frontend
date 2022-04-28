@@ -4,6 +4,7 @@ import AuthService from "../services/auth.service";
 import { Spinner } from "react-bootstrap";
 
 const Register = () => {
+  // FORM data to Submit
   const [credentials, setCredentials] = useState({
     firstname: "",
     lastname: "",
@@ -14,18 +15,18 @@ const Register = () => {
     postoffice: "",
     block: "",
     tehsil: "",
-    country: "India",
-    state: "",
     district: "",
+    state: "",
+    country: "India",
     pincode: "",
-    email: "",
-    password: "",
     special: "",
-    mobile: "",
     graduation: "",
     xii: "",
     skill: "",
     service: "",
+    mobile: "",
+    email: "",
+    password: "",
     address1: "",
   });
   // Loading State for Spinner
@@ -33,19 +34,20 @@ const Register = () => {
 
   let navigate = useNavigate();
 
-  const initialStateRender = useRef(true);
-  const initialCityRender = useRef(true);
   // Form States
-  const [country, setCountry] = useState([]);
-  const [countryName, setCountryName] = useState("");
+  // const [country, setCountry] = useState([]);
+  // const [countryName, setCountryName] = useState("");
   const [stat, setStat] = useState([]);
-  const [statName, setstatName] = useState("");
-  const [city, setCity] = useState([]);
-  const [cityName, setCityName] = useState("");
+  // const [statName, setstatName] = useState("");
+  // const [city, setCity] = useState([]);
+  // const [cityName, setCityName] = useState("");
+
+  // Successful Response from Backend
   const [successful, setSuccessful] = useState(false);
+  // For any errors , during Form Submit POST
   const [message, setMessage] = useState("");
 
-  // Get Token For Country State City API
+  // Get Token For State API
   const getToken = async () => {
     const token = await fetch(
       "https://www.universal-tutorial.com/api/getaccesstoken",
@@ -104,7 +106,7 @@ const Register = () => {
   //   setCredentials({ ...credentials, [e.target.name]: e.target.value });
   // };
 
-  // Re render when Country Selection is changed
+  // Re render when Country Selection is changed or Component Loads
   useEffect(() => {
     const getState = async () => {
       const token = await getToken();
@@ -148,6 +150,7 @@ const Register = () => {
   //   }
   // }, [statName]);
 
+  // On Change Handler for Inputs
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -158,6 +161,7 @@ const Register = () => {
     setSuccessful(false);
     setLoading(true);
 
+    // Form Submit POST
     AuthService.register(
       credentials.firstname,
       credentials.lastname,
@@ -184,6 +188,7 @@ const Register = () => {
     ).then(
       (response) => {
         setMessage(response.message);
+        // Form Submit is Successfull
         setSuccessful(true);
         setLoading(false);
       },
@@ -546,7 +551,7 @@ const Register = () => {
               ) : (
                 <button
                   type="submit"
-                  className="btn btn-primary mb-3"
+                  className="btn btn-primary mb-3 btn-block btn-lg"
                   disabled={loading}
                 >
                   Submit
@@ -554,6 +559,7 @@ const Register = () => {
               )}
             </>
           )}
+          {/* If any Errors , then Show Errors */}
           {message && (
             <div className="form-group">
               <div
