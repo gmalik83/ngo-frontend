@@ -26,15 +26,17 @@ const Slider = () => {
     );
   }, []);
   return (
+    // Slider for Image Carousel
     <div className="row">
       <div className="col-md-8">
         <div
-          style ={{margin:"25px 25px"}}
+          style={{ margin: "25px 25px" }}
           id="demo"
           className="carousel slide"
           data-ride="carousel"
           data-interval="2000"
         >
+          {/* If No Image from database , then Show a Default Image */}
           <ul className="carousel-indicators">
             {content.length === 0 ? (
               <li data-target="#demo" data-slide-to="0" className="active"></li>
@@ -47,25 +49,18 @@ const Slider = () => {
                 })}
               </>
             )}
-            {/* <li data-target="#demo" data-slide-to="0" className="active"></li>
-            <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
-            <li data-target="#demo" data-slide-to="3"></li>
-            <li data-target="#demo" data-slide-to="4"></li> */}
           </ul>
 
           <div className="carousel-inner">
             {content.length === 0 ? (
-              <>
-                <div className="carousel-item active">
-                  <img
-                    src="https://images.unsplash.com/photo-1617450365226-9bf28c04e130?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmdvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    alt="Default Image"
-                    height="320"
-                    width="900"
-                  />
-                </div>
-              </>
+              <div className="carousel-item active">
+                <img
+                  src="https://images.unsplash.com/photo-1617450365226-9bf28c04e130?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmdvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                  alt="Default Image"
+                  height="320"
+                  width="900"
+                />
+              </div>
             ) : (
               <>
                 {content.map((item, i) => {
@@ -96,21 +91,33 @@ const Slider = () => {
               </>
             )}
           </div>
-
-          <a className="carousel-control-prev" href="#demo" data-slide="prev">
-            <span className="carousel-control-prev-icon"></span>
+          {/* Controls for Slider} */}
+          <a
+            class="carousel-control-prev"
+            href="#demo"
+            role="button"
+            data-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
           </a>
-          <a className="carousel-control-next" href="#demo" data-slide="next">
-            <span className="carousel-control-next-icon"></span>
+          <a
+            class="carousel-control-next"
+            href="#demo"
+            role="button"
+            data-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
           </a>
         </div>
       </div>
       {message && console.log(message)}
       <div className="col-md-4">
         <div className="m-4">
-        <Announcement />
+          <Announcement />
+        </div>
       </div>
-      </div> 
     </div>
   );
 };
