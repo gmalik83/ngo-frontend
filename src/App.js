@@ -34,7 +34,7 @@ const App = () => {
           <Route path="/admin" exact element={<BoardAdmin />} />
           <Route path="/user" exact element={<BoardUser />} />
           <Route path="/profile" exact element={<Profile />} />
-          <Route path="/page/:Id" element={<New />} />
+          <Route path="/page/:Id" element={<New/>} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <Footer />

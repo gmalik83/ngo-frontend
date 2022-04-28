@@ -6,20 +6,25 @@ import img1 from "../images/NITKKR_logo.png";
 import AuthService from "./services/auth.service";
 
 export const Navbar = () => {
-  // Initial State for ModeratorBoard
-  // Only Show if Modal contains Role and valid login with token
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  // Initial State for AdministrationBoard
+  // Only Show if User Level is >=1 and <=6
+  const [showAdministrationBoard, setShowAdministrationBoard] = useState(false);
+  // For Admin Panel , When It will be developed
   const [showAdminBoard, setShowAdminBoard] = useState(false);
+  // Storing User Data from Local Storage
   const [currentUser, setCurrentUser] = useState(undefined);
 
-  // Check User When component loads
+  // GET User When component loads
   useEffect(() => {
+    // GET user from LocalStorage
     const user = AuthService.getCurrentUser();
     setCurrentUser(user);
-    // If User is logged in , then change state according to User Role
+    // If User exist , then change Navbar state according to User Role
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.level >= 1 && user.level <= 6);
+      // If User is Coordinator (Level>=1 and Level<=6) , Show Administraion Board
+      setShowAdministrationBoard(user.level >= 1 && user.level <= 6);
+      // If User Level is 1 , then Show Admin Board
       setShowAdminBoard(user.level === 1);
     }
     // EventBus.on('logout', () => {
@@ -31,8 +36,10 @@ export const Navbar = () => {
   }, []);
 
   const logOut = () => {
+    // Logout on Link Click (Remove User From Local Storage)
     AuthService.logout();
-    setShowModeratorBoard(false);
+    // Change Navbar (Hide Administration Board)
+    setShowAdministrationBoard(false);
     setShowAdminBoard(false);
     setCurrentUser(undefined);
   };
@@ -40,9 +47,9 @@ export const Navbar = () => {
   return (
     <div>
       {/* Container for Logo and Headline */}
-
+      {/* Grid ROW COL System for Layout */}
       <div className="row m-1">
-        <div className="col-md-2 offset-md-1" style={{ padding: "0px"}}>
+        <div className="col-md-2 offset-md-1" style={{ padding: "0px" }}>
           <img
             src={img1}
             alt="Logo"
@@ -68,7 +75,6 @@ export const Navbar = () => {
         <div className="row m-1">
           <div className="col">
             <nav className="navbar navbar-expand-lg navbar-dark custom-class1">
-              {/* <div className="container-fluid"> */}
               {/* Button Toggle for Smaller Screens */}
               <button
                 className="navbar-toggler"
@@ -95,7 +101,7 @@ export const Navbar = () => {
                       Home
                     </Link>
                   </li>
-
+                  {/* Dropdown for About Organization */}
                   <li
                     className="nav-item dropdown px-4 dropbtn"
                     id="myDropdown"
@@ -251,6 +257,7 @@ export const Navbar = () => {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
+                    {/* Page/:id is dynamic Route : Render <NEW/> Component */}
                       <li>
                         <Link className="dropdown-item" to="/page/7">
                           Navodaya School
@@ -454,27 +461,23 @@ export const Navbar = () => {
                       Contact Us
                     </Link>
                   </li>
-                  {showModeratorBoard && (
+                  {/* If user level is >=1 and <=6 , then show this link in navbar */}
+                  {showAdministrationBoard && (
                     <li className="nav-item px-4">
                       <Link to="/mod" className="nav-link">
                         Administration
                       </Link>
                     </li>
                   )}
-                  {/* {showAdminBoard && (
+                  {/* If User Level is 1 (Admin) , then Show Admin link in Navbar */}
+                  {showAdminBoard && (
                 <li className="nav-item px-4">
                   <Link to="/admin" className="nav-link">
                     Admin
                   </Link>
                 </li>
-              )} */}
-                  {/* {currentUser && (
-                <li className="nav-item px-4">
-                  <Link to="/user" className="nav-link">
-                    User
-                  </Link>
-                </li>
-              )} */}
+              )}
+                 {/* Show Profile of Logged In User */}
                   {currentUser && (
                     <div className="navbar-nav">
                       <li className="nav-item px-4">
@@ -521,7 +524,6 @@ export const Navbar = () => {
                   )}
                 </ul>
               </div>
-              {/* </div> */}
             </nav>
           </div>
         </div>
