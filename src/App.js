@@ -16,7 +16,7 @@ import BoardUser from "./components/file/BoardUser";
 import Profile from "./components/Profile";
 import New from "./components/New";
 import NotFound from "./components/NotFound";
-
+ 
 const App = () => {
   return (
     <>
