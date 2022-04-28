@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import UserService from "./services/user.service";
 
 const Values = () => {
+  // Array of Values from backend
   const [content, setContent] = useState([]);
+  // Message if Any Error Exist
   const [message, setMessage] = useState("");
 
+
   useEffect(() => {
+    // GET values from Backend 
     UserService.getValues().then(
       (response) => {
         if (response.status === 200) {
@@ -34,6 +38,7 @@ const Values = () => {
             <h3 className="main-heading">Vision , Mission and Values</h3>
             <div className="underline mx-auto"></div>
           </div>
+          {/* If Problem in Fetching data , then Display Default Data */}
           {content.length === 0 ? (
             <>
               <div className="col-md-4 text-center">
@@ -69,6 +74,7 @@ const Values = () => {
             </>
           ) : (
             <>
+            {/* Display FETCHED data from Backend */}
               {content.map((item, i) => {
                 return (
                   <div className="col-md-4 text-center">
