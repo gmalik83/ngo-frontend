@@ -28,7 +28,7 @@ export const Work = () => {
             providing the the chance . Our member also take pride in helping
             anyone out in need. Our Organization has helped more than 10,000
             deserving ones. 
-          </p>
+          </p> 
         </div>
       </section>
       <section className="section  border-top">
