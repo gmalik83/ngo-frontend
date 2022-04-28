@@ -11,7 +11,7 @@ const Loading = ({ size = 100 }) => {
         width: '100%',
         height: '100%',
       }}
-      role="status"
+      role="status" 
     >
       <Spinner style={{ width: size, height: size }} animation="border" />
     </div>
