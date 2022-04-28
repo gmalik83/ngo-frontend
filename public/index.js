@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             nextEl.style.display = "block";
           }
         }
-      });
+      }); 
     });
   }
   // end if innerWidth
