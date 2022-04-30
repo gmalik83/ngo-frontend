@@ -84,7 +84,7 @@ export const VisionAndMission = () => {
           </p>
         </div>
       </section>
-      {/* This is Dynamic Content  */}
+      {/* This is Dynamic Content  */} 
       <Values />
     </div>
   );
