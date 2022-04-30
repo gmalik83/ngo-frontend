@@ -29,7 +29,7 @@ const Values = () => {
       }
     );
   }, []);
-
+ 
   return (
     <section className="section bg-c-light border-top">
       <div className="container">
