@@ -126,7 +126,7 @@ export const Navbar = () => {
                           About POG
                         </Link>
                       </li>
-
+ 
                       <li>
                         <Link className="dropdown-item" to="/vision-mission">
                           Mission and Vision
