@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import { Spinner } from "react-bootstrap";
 
@@ -32,7 +32,7 @@ const Register = () => {
   // Loading State for Spinner
   const [loading, setLoading] = useState(false);
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   // Form States
   // const [country, setCountry] = useState([]);

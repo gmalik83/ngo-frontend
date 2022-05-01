@@ -51,7 +51,7 @@ const Announcement = () => {
             height="300"
           >
             {/* If there is no Data from Backend */}
-            {content.length === 0 ? (
+            {content.length === 0 && loading ? (
               <div className="spinner-grow text-danger" role="status">
                 <span className="sr-only">Loading...</span>
               </div>
@@ -60,7 +60,12 @@ const Announcement = () => {
                 {content.map((item, i) => {
                   return (
                     <p className="panel1">
-                      <a href={item.url} key={i} target="_blank">
+                      <a
+                        href={item.url}
+                        key={i}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         {item.heading}
                       </a>
                     </p>

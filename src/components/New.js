@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserService from "./services/user.service";
+import { Spinner } from "react-bootstrap";
 
 const New = () => {
   // Dynamic ID for Dynamic Routing
@@ -13,7 +14,7 @@ const New = () => {
   // For Any Error Message
   const [message, setMessage] = useState("");
 
-  // When Component Loads , then GET Page/:Id content from backend 
+  // When Component Loads , then GET Page/:Id content from backend
   useEffect(() => {
     UserService.getPage(Id).then(
       (response) => {
@@ -50,6 +51,13 @@ const New = () => {
         </>
       ) : (
         <h2>Unable to Load COntent</h2>
+      )}
+      {loading && (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden col-md-5 offset-md-4">
+            Loading...
+          </span>
+        </Spinner>
       )}
       {message && (
         <div className="form-group">

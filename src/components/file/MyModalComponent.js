@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import authHeader from "../services/authHeader";
-import { Modal, Button, CloseButton } from "react-bootstrap";
+import { Modal, Button} from "react-bootstrap";
 import AuthService from "../services/auth.service";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -131,7 +131,7 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
         url + "/api/update",
         {
           value,
-          id,
+          _id,
         },
         {
           headers: authHeader(),

@@ -7,9 +7,8 @@ const Values = () => {
   // Message if Any Error Exist
   const [message, setMessage] = useState("");
 
-
   useEffect(() => {
-    // GET values from Backend 
+    // GET values from Backend
     UserService.getValues().then(
       (response) => {
         if (response.status === 200) {
@@ -29,7 +28,7 @@ const Values = () => {
       }
     );
   }, []);
- 
+
   return (
     <section className="section bg-c-light border-top">
       <div className="container">
@@ -74,16 +73,26 @@ const Values = () => {
             </>
           ) : (
             <>
-            {/* Display FETCHED data from Backend */}
+              {/* Display FETCHED data from Backend */}
               {content.map((item, i) => {
                 return (
                   <div className="col-md-4 text-left text-justify">
-                    <h6>{item.title}{item.check}</h6>
+                    <h6>
+                      {item.title}
+                      {item.check}
+                    </h6>
                     <p>{item.data}</p>
                   </div>
                 );
               })}
             </>
+          )}
+          {message && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
+            </div>
           )}
         </div>
       </div>

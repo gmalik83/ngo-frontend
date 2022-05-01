@@ -40,7 +40,7 @@ const getServices = () => {
   return axios.get(API_URL1 + "services");
 };
 const getPage = (Id) => {
-  return axios.get(`${API_URL2}`+`${Id}`);
+  return axios.get(`${API_URL2}+${Id}`);
 };
 const UserService = {
   getPublicContent,
