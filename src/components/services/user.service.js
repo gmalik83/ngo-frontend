@@ -27,20 +27,26 @@ const getAdminBoard = () => {
 const getArticles = () => {
   return axios.get(API_URL1 + "articles");
 };
+// Public GET announcement on Homepage 
 const getAnnouncement = () => {
   return axios.get(API_URL1 + "announcements");
 };
+// GET for Images in Slider
 const getImages = () => {
   return axios.get(API_URL1 + "images");
 };
+// GET vision Mission Values 
+
 const getValues = () => {
   return axios.get(API_URL1 + "values");
 };
+// GET Services done by Group
 const getServices = () => {
   return axios.get(API_URL1 + "services");
 };
+// GET dynamic Page content based on Boilerplate
 const getPage = (Id) => {
-  return axios.get(`${API_URL2}+${Id}`);
+  return axios.get(`${API_URL2}${Id}`);
 };
 const UserService = {
   getPublicContent,
