@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MyModalComponent from "./MyModalComponent";
 import "./BoardUser.css";
 import UserService from "../services/user.service";
+import SearchForm from "./SearchFrom";
 
 import EventBus from "../../common/EventBus";
 const BoardModerator = () => {
@@ -71,7 +72,7 @@ const BoardModerator = () => {
       {!content.length && (
         <h1 className="text-center mt-4 mb-4">No Requests available</h1>
       )}
-
+      <SearchForm/>
       {modalState && dataId && (
         <MyModalComponent
           show={modalState}
@@ -91,7 +92,7 @@ const BoardModerator = () => {
               <th scope="col">State</th>
               <th scope="col">District</th>
               <th scope="col">Mobile</th>
-              <th scope="col">Current Role</th>
+              {/* <th scope="col">Current Role</th> */}
               <th scope="col">Profile</th>
             </tr>
           </thead>
@@ -106,7 +107,7 @@ const BoardModerator = () => {
                   <td>{item.state}</td>
                   <td>{item.district}</td>
                   <td>{item.mobile}</td>
-                  <td>{item.role}</td>
+                  {/* <td>{item.role}</td> */}
                   <td>
                     <button
                       className="btn btn-warning shadow"
