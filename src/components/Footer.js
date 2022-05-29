@@ -30,7 +30,7 @@ const Footer = () => {
           <div className="row mt-3">
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
-                <i className="fa-solid fa-gem"></i>Shiksha
+                <i className="fa-solid fa-gem"></i>Kartavya
               </h6>
             </div>
 
@@ -90,7 +90,7 @@ const Footer = () => {
               </p>
               <p>
                 <i className="fa fa-envelope me-3"></i>
-                info@shiksha.com
+                info@Kartavya.com
               </p>
               <p>
                 <i className="fa fa-phone me-3"></i> 01744 233 229
@@ -106,7 +106,7 @@ const Footer = () => {
       <div className="text-center p-4 own-class">
         © 2022 Copyright:
         <Link className="text-reset fw-bold" to="/">
-          shiksha.org
+          Kartavya.org
         </Link>
       </div>
     </footer>
