@@ -19,6 +19,24 @@ const getUserBoard = () => {
 const getModeratorBoard = () => {
   return axios.get(API_URL + "mod", { headers: authHeader() });
 };
+// Search Form Data
+const getSearchData = (
+  name,
+  mobile,
+  email,
+  village,
+  block,
+  tehsil,
+  district,
+  state,
+  country
+) => {
+  return axios.post(
+    API_URL1 + "searchData",
+    { name, mobile, email, village, block, tehsil, district, state, country },
+    { headers: authHeader() }
+  );
+};
 // Admin Board
 const getAdminBoard = () => {
   return axios.get(API_URL + "admin", { headers: authHeader() });
@@ -27,7 +45,7 @@ const getAdminBoard = () => {
 const getArticles = () => {
   return axios.get(API_URL1 + "articles");
 };
-// Public GET announcement on Homepage 
+// Public GET announcement on Homepage
 const getAnnouncement = () => {
   return axios.get(API_URL1 + "announcements");
 };
@@ -35,7 +53,7 @@ const getAnnouncement = () => {
 const getImages = () => {
   return axios.get(API_URL1 + "images");
 };
-// GET vision Mission Values 
+// GET vision Mission Values
 
 const getValues = () => {
   return axios.get(API_URL1 + "values");
@@ -59,7 +77,7 @@ const UserService = {
   getValues,
   getServices,
   getPage,
+  getSearchData
 };
 
 export default UserService;
- 

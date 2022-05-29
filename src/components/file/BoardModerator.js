@@ -81,7 +81,41 @@ const BoardModerator = () => {
     e.preventDefault();
     setSearchLoading(true);
     setFormSearchMessage("");
-    console.log("I am Clicked");
+    UserService.getSearchData(
+      formData.name,
+      formData.mobile,
+      formData.email,
+      formData.village,
+      formData.block,
+      formData.tehsil,
+      formData.district,
+      formData.state,
+      formData.country
+    ).then(
+      (response) => {
+        // If Response if OK
+        if (response.status === 200) {
+          // Response.data is array of pending requests
+          // Send this in Content Array
+          setContent(response.data);
+        }
+      },
+      (error) => {
+        // Set resMessage to Error , if it exists
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setFormSearchMessage(resMessage);
+        if (error.response && error.response.status === 403) {
+          // If Forbidden then Logout User
+          EventBus.dispatch("logout");
+        }
+      }
+    );
   };
 
   const onSearchChange = (e) => {
@@ -98,7 +132,10 @@ const BoardModerator = () => {
       {/* Output Form Here*/}
       <div className="row">
         <div className="col">
-          <form onSubmit={handleSearchSubmit} className="border border-success p-2">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="border border-success p-2"
+          >
             <h3 className="text-center">Search for Any Person</h3>
             <div className="form-row">
               <div className="form-group col-md-4">
@@ -128,7 +165,7 @@ const BoardModerator = () => {
               <div className="form-group col-md-4">
                 <label htmlFor="inputMobile">Email</label>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
                   id="email"
                   name="email"
@@ -212,10 +249,10 @@ const BoardModerator = () => {
             <button type="submit" className="btn btn-danger btn-block">
               Search
             </button>
-            {message && (
+            {formSearchMessage && (
               <div className="form-group col-md-5 offset-md-4">
                 <div className="alert alert-danger" role="alert">
-                  {message}
+                  {formSearchMessage}
                 </div>
               </div>
             )}
