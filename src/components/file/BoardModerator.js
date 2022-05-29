@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import MyModalComponent from "./MyModalComponent";
 import "./BoardUser.css";
 import UserService from "../services/user.service";
-import SearchForm from "./SearchFrom";
 
 import EventBus from "../../common/EventBus";
 const BoardModerator = () => {
@@ -64,6 +63,30 @@ const BoardModerator = () => {
     // Invert ModalState on Toggle
     setModalState(!modalState);
   };
+  // For Search Form
+  const [formSearchMessage, setFormSearchMessage] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
+    email: "",
+    village: "",
+    block: "",
+    tehsil: "",
+    district: "",
+    state: "",
+    country: "",
+  });
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearchLoading(true);
+    setFormSearchMessage("");
+    console.log("I am Clicked");
+  };
+
+  const onSearchChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="container table-responsive">
@@ -72,7 +95,133 @@ const BoardModerator = () => {
       {!content.length && (
         <h1 className="text-center mt-4 mb-4">No Requests available</h1>
       )}
-      <SearchForm/>
+      {/* Output Form Here*/}
+      <div className="row">
+        <div className="col">
+          <form onSubmit={handleSearchSubmit} className="border border-success p-2">
+            <h3 className="text-center">Search for Any Person</h3>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <label htmlFor="Name">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={onSearchChange}
+                  name="name"
+                />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="inputMobile">Mobile</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="mobile"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={onSearchChange}
+                  placeholder="Mobile"
+                />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="inputMobile">Email</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={onSearchChange}
+                  placeholder="Email"
+                />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <label htmlFor="Village">Village</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="village"
+                  value={formData.village}
+                  onChange={onSearchChange}
+                  name="village"
+                />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="inputBlock">Block</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="block"
+                  name="block"
+                  value={formData.block}
+                  onChange={onSearchChange}
+                />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="inputTehsil">Tehsil</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="Tehsil"
+                  name="tehsil"
+                  value={formData.tehsil}
+                  onChange={onSearchChange}
+                />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <label htmlFor="District">District</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="District"
+                  value={formData.district}
+                  onChange={onSearchChange}
+                  name="district"
+                />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="inputState">State</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="state"
+                  name="state"
+                  value={formData.state}
+                  onChange={onSearchChange}
+                />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="inputCountry">Country</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="country"
+                  name="country"
+                  value={formData.country}
+                  onChange={onSearchChange}
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="btn btn-danger btn-block">
+              Search
+            </button>
+            {message && (
+              <div className="form-group col-md-5 offset-md-4">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
+              </div>
+            )}
+          </form>
+        </div>
+      </div>
       {modalState && dataId && (
         <MyModalComponent
           show={modalState}
