@@ -68,7 +68,7 @@ export const Contact = () => {
                 <h6>Support Office</h6>
                 <div className="underline"></div>
                 <p>
-                  Shiksha ,Level 1, NIT Kurukshetra <br></br>Haryana 136119
+                  Sample Support Address <br></br>Haryana 136119
                 </p>
               </div>
             </div>
@@ -79,8 +79,7 @@ export const Contact = () => {
                 <h6>Registered Office</h6>
                 <div className="underline"></div>
                 <p>
-                  Shiksha Group , Level 5 , PK Tower <br></br>New Delhi , India
-                  110045
+                  Sample Registered Office herez<br></br>New Delhi , India 110045
                 </p>
               </div>
             </div>
