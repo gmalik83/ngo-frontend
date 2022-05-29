@@ -241,7 +241,7 @@ p {
 .custom-class1 {
   display: flex !important;
   flex-wrap: wrap !important;
-  background-color: black;
+  background-color: #337ab7;
   color: white !important;
   height: auto;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import img1 from "../images/NITKKR_logo.png";
+import img1 from "../images/img.jpg";
 
 import AuthService from "./services/auth.service";
 
@@ -54,18 +54,19 @@ export const Navbar = () => {
             src={img1}
             alt="Logo"
             style={{
-              width: "150px",
-              height: "100px",
+              width: "200px",
+              height: "150px",
               float: "left",
               marginRight: "15px",
+              borderRadius:"20px"
             }}
           />
         </div>
         <div className="col-md-9">
           <h1 className="ht1">
-            Shiksha : A Initiative for helping those in need
+            Kartavya : A Initiative for helping those in need
           </h1>
-          <h3 className="ht4">We are empowering Students</h3>
+          <h3 className="ht4">We are empowering Societies</h3>
         </div>
       </div>
 
@@ -126,7 +127,7 @@ export const Navbar = () => {
                           About POG
                         </Link>
                       </li>
- 
+
                       <li>
                         <Link className="dropdown-item" to="/vision-mission">
                           Mission and Vision
@@ -267,7 +268,7 @@ export const Navbar = () => {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                    {/* Page/:id is dynamic Route : Render <NEW/> Component */}
+                      {/* Page/:id is dynamic Route : Render <NEW/> Component */}
                       <li>
                         <Link className="dropdown-item" to="/page/7">
                           Navodaya School
@@ -290,7 +291,7 @@ export const Navbar = () => {
                       aria-expanded="false"
                     >
                       Admission
-                    </Link> 
+                    </Link>
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
@@ -481,13 +482,13 @@ export const Navbar = () => {
                   )}
                   {/* If User Level is 1 (Admin) , then Show Admin link in Navbar */}
                   {showAdminBoard && (
-                <li className="nav-item px-4">
-                  <Link to="/admin" className="nav-link">
-                    Admin
-                  </Link>
-                </li>
-              )}
-                 {/* Show Profile of Logged In User */}
+                    <li className="nav-item px-4">
+                      <Link to="/admin" className="nav-link">
+                        Admin
+                      </Link>
+                    </li>
+                  )}
+                  {/* Show Profile of Logged In User */}
                   {currentUser && (
                     <div className="navbar-nav">
                       <li className="nav-item px-4">
