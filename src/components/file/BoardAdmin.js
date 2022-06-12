@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import UserService from '../services/user.service';
-import EventBus from '../../common/EventBus';
-import {Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import UserService from "../services/user.service";
+import EventBus from "../../common/EventBus";
+import { Link } from "react-router-dom";
 
 const BoardAdmin = () => {
-  //
-  //
-
   const [content, setContent] = useState([]);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     UserService.getAdminBoard().then(
@@ -29,54 +26,70 @@ const BoardAdmin = () => {
         setMessage(_content);
 
         if (error.response && error.response.status === 403) {
-          EventBus.dispatch('logout');
+          EventBus.dispatch("logout");
         }
       }
     );
   }, []);
   return (
-    <div className="container table-responsive">
-      <h3 className="mt-3 mb-3">All Volunteer Details:</h3>
-      {!content.length && <h1>No data available</h1>}
-      {!message && (
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Country</th>
-              <th scope="col">State</th>
-              <th scope="col">City</th>
-              <th scope="col">Mobile</th>
-              <th scope='col'>Profile</th>
-            </tr>
-          </thead>
-          <tbody>
-            {content.map((item, i) => {
-              return (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.country}</td>
-                  <td>{item.state}</td>
-                  <td>{item.city}</td>
-                  <td>{item.mobile}</td>
-                  <td><Link className='btn btn-warning shadow' to='/'>View</Link></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
-      {message && (
-        <div className="form-group">
-          <div className="alert alert-danger" role="alert">
-            {message}
+    <div className="container">
+      <h1 className="text-center m-2">This is Admin Panel </h1>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Announcement</h5>
+                <p className="card-text">
+                  Add New Announcement , Delete Announcement , Update
+                  Announcement from here
+                </p>
+                <Link className="btn btn-primary" to="/admin/announcement">
+                  Go to Announcement Section
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Image Slider</h5>
+                <p className="card-text">
+                  Add New Image in Slider , Delete Image in Slider , Update
+                  Image in Slider
+                </p>
+                <Link className="btn btn-primary" to="/admin/image">
+                  Go to Image Section
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Vision And Mission</h5>
+                <p className="card-text">Update Vision and Mission from Here</p>
+                <Link className="btn btn-primary" to="/admin/vision">
+                  Go to Vision and Mission Section Section
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">New Page Insert </h5>
+                <p className="card-text">
+                  Add New Page , Update Page , Delete Page
+                </p>
+                <Link className="btn btn-primary" to="/admin/page">
+                  Go to Page Section
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

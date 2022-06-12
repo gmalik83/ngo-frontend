@@ -16,8 +16,12 @@ import BoardUser from "./components/file/BoardUser";
 import Profile from "./components/Profile";
 import New from "./components/New";
 import NotFound from "./components/NotFound";
-import  {VisionAndMission}  from "./components/VisionAndMission";
- 
+import { VisionAndMission } from "./components/VisionAndMission";
+import AdminAnnouncement from "./components/file/Admin/AdminAnnouncement";
+import AdminImage from "./components/file/Admin/AdminImage";
+import AdminPage from "./components/file/Admin/AdminPage";
+import AdminVision from "./components/file/Admin/AdminVision";
+
 const App = () => {
   return (
     <>
@@ -26,6 +30,14 @@ const App = () => {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/work" exact element={<Work />} />
+          <Route
+            path="/admin/announcement"
+            exact
+            element={<AdminAnnouncement />}
+          />
+          <Route path="/admin/image" exact element={<AdminImage />} />
+          <Route path="/admin/page" exact element={<AdminPage />} />
+          <Route path="/admin/vision" exact element={<AdminVision />} />
           <Route path="/member" exact element={<Member />} />
           <Route path="/about" exact element={<About />} />
           <Route path="/contact" exact element={<Contact />} />
@@ -35,8 +47,8 @@ const App = () => {
           <Route path="/admin" exact element={<BoardAdmin />} />
           <Route path="/user" exact element={<BoardUser />} />
           <Route path="/profile" exact element={<Profile />} />
-          <Route path="/vision-mission" exact element={<VisionAndMission/>}/>
-          <Route path="/page/:Id" element={<New/>} />
+          <Route path="/vision-mission" exact element={<VisionAndMission />} />
+          <Route path="/page/:Id" element={<New />} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <Footer />
