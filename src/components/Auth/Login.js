@@ -8,15 +8,16 @@ const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   // Message for Any Errors
   const [message, setMessage] = useState("");
-  // Loading State on Submit Button
+  // Loading State on Submit Button : Submit Button Will be replaced by Spinner
   const [loading, setLoading] = useState(false);
   // LoginMessage
   const [loginMessage, setLoginMessage] = useState("");
 
   let navigate = useNavigate();
 
-  // Check if User is already logged in when Login Component Loads
+  // Login Component will not be shown to logged in users
   useEffect(() => {
+    // Getting the Token from LocalStorgae if User is logged in 
     const user = AuthService.getCurrentUser();
     if (user) {
       // If User is Logged in , then dont show form and display error login message
@@ -24,7 +25,7 @@ const Login = () => {
     }
   }, []);
 
-  // Form Submit Handler
+  // Login Form Submit Handler
   const handleSubmit = (e) => {
     e.preventDefault();
     setMessage("");
@@ -70,11 +71,12 @@ const Login = () => {
           </div>
         </div>
       ) : (
+        // If User is not Logged in , then Show the Form
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-7 offset-md-3">
               <h3 className="text-center mt-2">
-                Please Coordinators Login Here
+                Only Coordinators Login Here
               </h3>
               <hr></hr>
             </div>
