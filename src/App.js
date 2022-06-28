@@ -26,6 +26,7 @@ const App = () => {
   return (
     <>
       <Router>
+        {/* Navbar is Fixed for Every Page*/}
         <Navbar />
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/page/:Id" element={<New />} />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
+        {/* Footer is fixed for Every Page */}
         <Footer />
       </Router>
     </>
