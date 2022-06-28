@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import { Spinner } from "react-bootstrap";
 
 const Register = () => {
-  // FORM data to Submit
+  // State to Store Form Input Data 
   const [credentials, setCredentials] = useState({
     firstname: "",
     lastname: "",
@@ -31,17 +30,9 @@ const Register = () => {
   });
   // Loading State for Spinner
   const [loading, setLoading] = useState(false);
-
-  // let navigate = useNavigate();
-
-  // Form States
-  // const [country, setCountry] = useState([]);
-  // const [countryName, setCountryName] = useState("");
+  
+// Array of States to Get API data 
   const [stat, setStat] = useState([]);
-  // const [statName, setstatName] = useState("");
-  // const [city, setCity] = useState([]);
-  // const [cityName, setCityName] = useState("");
-
   // Successful Response from Backend
   const [successful, setSuccessful] = useState(false);
   // For any errors , during Form Submit POST
