@@ -35,10 +35,7 @@ const BoardModerator = () => {
           error.toString();
 
         setMessage(resMessage);
-        if (error.response && error.response.status === 403) {
-          // If Forbidden then Logout User
-          EventBus.dispatch("logout");
-        }
+       
       }
     );
   }, []);

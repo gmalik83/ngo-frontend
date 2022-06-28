@@ -19,6 +19,12 @@ const getUserBoard = () => {
 const getModeratorBoard = () => {
   return axios.get(API_URL + "mod", { headers: authHeader() });
 };
+const newAnnoucement = (url, heading) => {
+  return axios.post(API_URL1 + "newAnnoucement", {url,heading},{ headers: authHeader() });
+};
+const getAdminAnnouncement = () => {
+  return axios.get(API_URL1 + "admin/announcements", { headers: authHeader() });
+};
 // Search Form Data
 const getSearchData = (
   name,
@@ -77,7 +83,9 @@ const UserService = {
   getValues,
   getServices,
   getPage,
-  getSearchData
+  getSearchData,
+  getAdminAnnouncement,
+  newAnnoucement,
 };
 
 export default UserService;

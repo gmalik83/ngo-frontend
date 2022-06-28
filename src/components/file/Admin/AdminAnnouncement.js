@@ -1,29 +1,80 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
+// import EventBus from "../../common/EventBus";
+
+import UserService from "../../services/user.service.js";
 
 const AdminAnnouncement = () => {
   const [form, setForm] = useState(false);
   const [viewtable, setViewTable] = useState(true);
+  // Array for Display Pending Requests
+  const [content, setContent] = useState([]);
+  // Set Message
+  const [message, setMessage] = useState("");
+  // For Open/Close MODAL State
+  const [modalState, setModalState] = useState(false);
+  // UserID for Pending Request Item
+  const [dataId, setDataId] = useState("");
+  // Call this when Component Render
   const [loading, setLoading] = useState(false);
   const [announcement, setAnnouncement] = useState({ url: "", heading: "" });
+  // When Component Renders 
+  useEffect(() => {
+    UserService.getAdminAnnouncement().then(
+      (response) => {
+        // If Response if OK
+        if (response.status === 200) {
+          // Response.data is array of pending requests
+          // Send this in Content Array
+          setContent(response.data);
+        }
+      },
+      (error) => {
+        // Set resMessage to Error , if it exists
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
 
+        setMessage(resMessage);
+        if (error.response && error.response.status === 403) {
+          // If Forbidden then Logout User
+          // EventBus.dispatch("logout");
+        }
+      }
+    );
+  }, []);
   // Show New Announcement Form
   const handleNewForm = () => {
     setForm(true);
+    setViewTable(false);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    UserService.newAnnoucement(announcement.url,announcement.heading).then((response)=>{
+      console.log(response.data.message);
+      setLoading(false);
+     
+    },(error) => {
+      const resMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      setMessage(resMessage);
+      setLoading(false);
+    })
     // Send Request for New Announcement to Backend
-
-    //setForm(false);
   };
-  const hideFormShowTable = ()=>{
-      // Form is Hidden 
-      setForm(false);
-
-  }
+  const hideFormShowTable = () => {
+    // Form is Hidden
+    setForm(false);
+  };
   const onChange = (e) => {
     setAnnouncement({ ...announcement, [e.target.name]: e.target.value });
   };
@@ -112,7 +163,84 @@ const AdminAnnouncement = () => {
             </form>
           </div>
         ) : (
-          <></>
+          <div className="container table-responsive">
+            <h3 className="mt-3 mb-3">All Available Announcement:</h3>
+            {/*If Content array is NULL*/}
+            {!content.length && (
+              <h1 className="text-center mt-4 mb-4">
+                No Announcement available
+              </h1>
+            )}
+            {/* {modalState && dataId && (
+              <AModal
+                show={modalState}
+                id={dataId}
+                handleModalToggle={changeModal}
+              ></AModal>
+            )} */}
+
+            {content.length ? (
+              <table className="table table1">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Heading of Announcement</th>
+                    {/* <th scope="col">Date Uploaded</th> */}
+                    {/* <th scope="col">INFO</th>
+                    <th scope="col">UPDATE</th>
+                    <th scope="col">DELETE</th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {content.map((item, i) => {
+                    return (
+                      <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{item.heading}</td>
+                        {/* <td>{item.date}</td> */}
+                        {/* <td>
+                          <button
+                            className="btn btn-warning shadow"
+                            // onClick={handleModalToggle}
+                            data-id={item._id}
+                          >
+                            View
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            className="btn btn-success shadow"
+                            // onClick={handleModalToggle}
+                            data-id={item._id}
+                          >
+                            Update
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            className="btn btn-danger shadow"
+                            // onClick={handleModalToggle}
+                            data-id={item._id}
+                          >
+                            Delete
+                          </button>
+                        </td> */}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            ) : (
+              <></>
+            )}
+            {message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>
