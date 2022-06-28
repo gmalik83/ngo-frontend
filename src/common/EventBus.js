@@ -1,3 +1,4 @@
+// EventBus Function for Tying Events to Event Listener
 const eventBus = {
   on(event, callback) {
     document.addEventListener(event, (e) => callback(e.detail));
