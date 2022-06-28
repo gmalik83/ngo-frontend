@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-// Parsing JSON Token
+// Function for Parsing JSON Token
 const parseJwt = (token) => {
   try {
     return JSON.parse(atob(token.split('.')[1]));
@@ -10,7 +10,7 @@ const parseJwt = (token) => {
   }
 };
 
-// Verify JWT
+// Verifying JWT 
 const AuthVerify = (props) => {
   props.history.listen(() => {
     const user = JSON.parse(localStorage.getItem('user'));
