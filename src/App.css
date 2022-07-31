@@ -214,7 +214,7 @@ body {
 .underline {
   height: 4px;
   width: 4rem;
-  background-color: #f76c2f;
+  background-color: #f76c2f; 
   margin-top: 10px;
   margin-bottom: 10px;
 }
