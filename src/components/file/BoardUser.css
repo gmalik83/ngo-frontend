@@ -12,4 +12,4 @@
   
   .table1 tr:nth-child(even){background-color: #f2f2f2;}
   
-  .table1 tr:hover {background-color: #ddd;}
+  .table1 tr:hover {background-color: #ddd;} 

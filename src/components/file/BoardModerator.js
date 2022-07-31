@@ -118,7 +118,7 @@ const BoardModerator = () => {
   const onSearchChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+ 
   return (
     <div className="container table-responsive">
       <h3 className="mt-3 mb-3">All Volunteer Details:</h3>

@@ -94,3 +94,4 @@ const BoardAdmin = () => {
   );
 };
 export default BoardAdmin;
+  

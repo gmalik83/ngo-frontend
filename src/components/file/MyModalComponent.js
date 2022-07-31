@@ -348,7 +348,7 @@ const MyModalComponent = ({ show, id, handleModalToggle }) => {
                   aria-describedby="pincodeHelp"
                   readOnly
                 />
-              </div>
+              </div> 
               <hr></hr>
               <h4 className="text-center">
                 Educational and Professional Details

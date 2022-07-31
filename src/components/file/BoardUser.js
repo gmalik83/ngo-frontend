@@ -74,7 +74,7 @@ const BoardUser = () => {
           </div>
         </div>
       )}
-    </div>
+    </div> 
   );
 };
 
