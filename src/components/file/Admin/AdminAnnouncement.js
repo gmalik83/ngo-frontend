@@ -56,7 +56,7 @@ const AdminAnnouncement = () => {
     e.preventDefault();
     setLoading(true);
     UserService.newAnnoucement(announcement.url,announcement.heading).then((response)=>{
-      console.log(response.data.message);
+      window.location.reload();
       setLoading(false);
      
     },(error) => {
