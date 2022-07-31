@@ -6,4 +6,4 @@ const NotFound = ()=>{
         <img src={img1}  className="text-center" alt="Not Found : Error 404"/> 
     )
 }
-export default NotFound;
+export default NotFound; 

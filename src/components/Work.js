@@ -21,7 +21,7 @@ export const Work = () => {
         <div className="container">
           <h5 className="main-heading">Shiksha Initiaves</h5>
           <div className="underline"></div>
-          <p>
+          <p> 
             We at North Legion takes our work serious and always encourage our
             members , volunteers to take initiaves for the greater good. We work
             with different sectors to enable benefit for more and more people by

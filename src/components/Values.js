@@ -27,7 +27,7 @@ const Values = () => {
         setMessage(resMessage);
       }
     );
-  }, []);
+  }, []); 
 
   return (
     <section className="section bg-c-light border-top">

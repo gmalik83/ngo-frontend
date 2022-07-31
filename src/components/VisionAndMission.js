@@ -22,7 +22,7 @@ export const VisionAndMission = () => {
           <h5 className="main-heading">Vision</h5>
           <hr></hr>
           {/* <div className="underline"></div> */}
-          <p> 
+          <p>  
             Parivartan, since decade and a half is active for social
             transformation, wherein the marginalized sections of community are
             socially, economically and politically empowered to lead life of

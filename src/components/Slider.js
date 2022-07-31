@@ -8,7 +8,7 @@ const Slider = () => {
   // Message for Any Error
   const [message, setMessage] = useState("");
   // Call When Component Loads
-  useEffect(() => {
+  useEffect(() => { 
     // API Request to Get Images from Backend
     UserService.getImages().then(
       (response) => {

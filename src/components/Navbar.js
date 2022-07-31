@@ -69,7 +69,7 @@ export const Navbar = () => {
           <h3 className="ht4">We are empowering Societies</h3>
         </div>
       </div>
-
+ 
       {/* Header Ended */}
       {/* Navbar Starts */}
       <>
